@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const emit = defineEmits<{
-  analyze: [input: string]
-}>()
-
+const router = useRouter()
 const scoreInput = ref('')
 
 const copyPowerShellCode = () => {
@@ -21,7 +19,11 @@ const handleAnalyze = () => {
     alert('请输入数据')
     return
   }
-  emit('analyze', scoreInput.value)
+  // 通过路由导航到报告页面,并传递数据
+  router.push({
+    path: '/report',
+    query: { data: scoreInput.value }
+  })
 }
 </script>
 

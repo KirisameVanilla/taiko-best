@@ -1,41 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import GuideView from './components/GuideView.vue'
-import ReportView from './components/ReportView.vue'
-import type { UserScore, SongStats } from './types'
-
-const showGuide = ref(true)
-const scoreInput = ref('')
-const results = ref<SongStats[]>([])
-const isLoading = ref(false)
-
-const handleAnalyze = (input: string) => {
-  scoreInput.value = input
-  showGuide.value = false
-}
-
-const handleResults = (data: SongStats[]) => {
-  results.value = data
-  isLoading.value = false
-}
-
-const handleBack = () => {
-  showGuide.value = true
-  results.value = []
-}
+// 使用Vue Router进行页面导航
 </script>
 
 <template>
   <div id="app">
-    <GuideView 
-      v-if="showGuide" 
-      @analyze="handleAnalyze"
-    />
-    <ReportView 
-      v-else 
-      :score-input="scoreInput"
-      @back="handleBack"
-    />
+    <router-view />
   </div>
 </template>
 

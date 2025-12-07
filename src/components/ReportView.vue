@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import type { SongStats } from '../types'
 import { 
   parsePastedScores, 
@@ -21,6 +22,7 @@ const emit = defineEmits<{
   back: []
 }>()
 
+const router = useRouter()
 const notice = ref('正在加载数据…')
 const results = ref<SongStats[]>([])
 const overallRating = ref(0)
@@ -125,7 +127,7 @@ const topLists = computed(() => ({
     <TopTable title="节奏处理 Top 20" :data="topLists.rhythm" valueKey="rhythm" />
     <TopTable title="复合处理 Top 20" :data="topLists.complex" valueKey="complex" />
 
-    <button @click="emit('back')" class="back-btn">返回</button>
+    <button @click="router.push('/')" class="back-btn">返回</button>
   </div>
 </template>
 

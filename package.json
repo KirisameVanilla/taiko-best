@@ -12,9 +12,10 @@
     "postinstall": "npm run extract-songs || echo 'Warning: Failed to extract songs.json'"
   },
   "dependencies": {
-    "vue": "^3.4.0",
     "chart.js": "^4.4.0",
-    "chartjs-plugin-datalabels": "^2.2.0"
+    "chartjs-plugin-datalabels": "^2.2.0",
+    "vue": "^3.4.0",
+    "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
