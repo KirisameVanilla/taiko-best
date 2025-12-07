@@ -103,29 +103,32 @@ const topLists = computed(() => ({
 
 <template>
   <div class="container">
-    <h1>玩家Rating及六维雷达图</h1>
     <div v-if="notice" class="notice">{{ notice }}</div>
     
-    <div class="summary">
-      <div class="stat-box">
-        <div class="stat-value">{{ overallRating.toFixed(2) }}</div>
-        <div class="stat-label">Rating</div>
+    <template v-else>
+      <h1>玩家 Rating 及六维雷达图</h1>
+      
+      <div class="summary">
+        <div class="stat-box">
+          <div class="stat-value">{{ overallRating.toFixed(2) }}</div>
+          <div class="stat-label">Rating</div>
+        </div>
       </div>
-    </div>
 
-    <div class="chart-container">
-      <RadarChart :data="radarData" />
-    </div>
+      <div class="chart-container">
+        <RadarChart :data="radarData" />
+      </div>
 
-    <TopTable title="Rating Top 20" :data="topLists.rating" valueKey="rating" />
-    <TopTable title="大歌力 Top 20" :data="topLists.daigouryoku" valueKey="daigouryoku" />
-    <TopTable title="体力 Top 20" :data="topLists.stamina" valueKey="stamina" />
-    <TopTable title="高速处理 Top 20" :data="topLists.speed" valueKey="speed" />
-    <TopTable title="精度力 Top 20" :data="topLists.accuracy_power" valueKey="accuracy_power" />
-    <TopTable title="节奏处理 Top 20" :data="topLists.rhythm" valueKey="rhythm" />
-    <TopTable title="复合处理 Top 20" :data="topLists.complex" valueKey="complex" />
+      <TopTable title="Rating Top 20" :data="topLists.rating" valueKey="rating" />
+      <TopTable title="大歌力 Top 20" :data="topLists.daigouryoku" valueKey="daigouryoku" />
+      <TopTable title="体力 Top 20" :data="topLists.stamina" valueKey="stamina" />
+      <TopTable title="高速处理 Top 20" :data="topLists.speed" valueKey="speed" />
+      <TopTable title="精度力 Top 20" :data="topLists.accuracy_power" valueKey="accuracy_power" />
+      <TopTable title="节奏处理 Top 20" :data="topLists.rhythm" valueKey="rhythm" />
+      <TopTable title="复合处理 Top 20" :data="topLists.complex" valueKey="complex" />
 
-    <button @click="router.push('/')" class="back-btn">返回</button>
+      <button @click="router.push('/')" class="back-btn">返回</button>
+    </template>
   </div>
 </template>
 
