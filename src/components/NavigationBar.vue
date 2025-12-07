@@ -15,10 +15,13 @@ onMounted(() => {
   checkScoreData()
   // 监听 storage 事件以响应 localStorage 的变化
   window.addEventListener('storage', checkScoreData)
+  // 监听自定义事件以响应同一页面内的 localStorage 变化
+  window.addEventListener('localStorageUpdate', checkScoreData)
 })
 
 onUnmounted(() => {
   window.removeEventListener('storage', checkScoreData)
+  window.removeEventListener('localStorageUpdate', checkScoreData)
 })
 
 // 手动检查 localStorage 变化（用于同一标签页内的更新）

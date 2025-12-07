@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import './GuideView.css'
 
 const router = useRouter()
 const scoreInput = ref('')
@@ -32,6 +33,8 @@ const handleAnalyze = () => {
   }
   // 将数据存储到 localStorage
   localStorage.setItem('taikoScoreData', scoreInput.value)
+  // 触发自定义事件以通知其他组件
+  window.dispatchEvent(new Event('localStorageUpdate'))
   // 导航到报告页面
   router.push('/report')
 }
@@ -65,133 +68,3 @@ const handleAnalyze = () => {
     <button @click="handleAnalyze" class="analyze-btn">分析数据</button>
   </div>
 </template>
-
-<style scoped>
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-h2 {
-  text-align: center;
-  color: #333;
-}
-
-h6 {
-  text-align: center;
-  color: #888;
-  margin: 10px 0;
-}
-
-p {
-  margin: 10px 0;
-  line-height: 1.6;
-}
-
-a {
-  color: #e91e63;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.links-section {
-  background: #f5f5f5;
-  padding: 15px 20px;
-  border-radius: 8px;
-  margin: 15px 0;
-  border-left: 4px solid #e91e63;
-}
-
-.links-title {
-  font-weight: bold;
-  color: #333;
-  margin: 0 0 10px 0;
-}
-
-.links-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.links-list li {
-  padding: 8px 0;
-  padding-left: 20px;
-  position: relative;
-}
-
-.links-list li::before {
-  content: "▸";
-  position: absolute;
-  left: 0;
-  color: #e91e63;
-  font-weight: bold;
-}
-
-.links-list li a {
-  font-size: 15px;
-  transition: color 0.3s;
-}
-
-.links-list li a:hover {
-  color: #c2185b;
-  text-decoration: none;
-}
-
-.textarea-container {
-  position: relative;
-  margin: 20px 0;
-}
-
-textarea {
-  width: 100%;
-  padding: 10px;
-  padding-right: 70px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-family: monospace;
-  box-sizing: border-box;
-  resize: none;
-}
-
-.paste-btn-inside {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 6px 12px;
-  background: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.paste-btn-inside:hover {
-  background: #1976d2;
-}
-
-.analyze-btn {
-  width: 100%;
-  padding: 12px;
-  background: #e91e63;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.analyze-btn:hover {
-  background: #c2185b;
-}
-</style>
