@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { SongStats } from '../types'
-import html2canvas from 'html2canvas'
-import { ref } from 'vue'
 
 interface Props {
   title: string
@@ -10,8 +8,6 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const tableRef = ref<HTMLElement | null>(null)
-const isGenerating = ref(false)
 
 const formatValue = (item: SongStats, key: keyof SongStats): string => {
   const value = item[key]
@@ -20,39 +16,12 @@ const formatValue = (item: SongStats, key: keyof SongStats): string => {
   }
   return String(value)
 }
-
-const saveAsImage = async () => {
-  if (!tableRef.value || isGenerating.value) return
-  
-  isGenerating.value = true
-  try {
-    const canvas = await html2canvas(tableRef.value, {
-      backgroundColor: '#ffffff',
-      scale: 2,
-      useCORS: true,
-      ignoreElements: (el: Element) => el.classList.contains('no-capture')
-    })
-    
-    const link = document.createElement('a')
-    link.download = `taiko-best-${props.title}.png`
-    link.href = canvas.toDataURL('image/png')
-    link.click()
-  } catch (e) {
-    console.error('Failed to generate image:', e)
-    alert('图片生成失败')
-  } finally {
-    isGenerating.value = false
-  }
-}
 </script>
 
 <template>
-  <div class="table-section" ref="tableRef">
+  <div class="table-section">
     <div class="section-header">
       <h2>{{ title }}</h2>
-      <button class="save-btn no-capture" @click="saveAsImage" :disabled="isGenerating">
-        {{ isGenerating ? '保存中...' : '保存图片' }}
-      </button>
     </div>
     <table>
       <thead>

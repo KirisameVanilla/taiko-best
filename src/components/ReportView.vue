@@ -27,9 +27,21 @@ const radarData = ref({
   complex: 0
 })
 const copySuccess = ref(false)
-const overviewRef = ref<HTMLElement | null>(null)
-const fullReportRef = ref<HTMLElement | null>(null)
+const contentRef = ref<HTMLElement | null>(null)
 const isSaving = ref(false)
+
+const activeSection = ref('overview')
+
+const menuItems = [
+  { id: 'overview', label: '概览' },
+  { id: 'rating', label: 'Rating Top 20' },
+  { id: 'daigouryoku', label: '大歌力 Top 20' },
+  { id: 'stamina', label: '体力 Top 20' },
+  { id: 'speed', label: '高速处理 Top 20' },
+  { id: 'accuracy_power', label: '精度力 Top 20' },
+  { id: 'rhythm', label: '节奏处理 Top 20' },
+  { id: 'complex', label: '复合处理 Top 20' }
+]
 
 onMounted(async () => {
   try {
@@ -105,6 +117,17 @@ const topLists = computed(() => ({
   complex: [...results.value].sort((a, b) => b.complex - a.complex).slice(0, 20)
 }))
 
+const currentTableData = computed(() => {
+  if (activeSection.value === 'overview') return null
+  const item = menuItems.find(i => i.id === activeSection.value)
+  if (!item) return null
+  return {
+    title: item.label,
+    data: topLists.value[activeSection.value as keyof typeof topLists.value],
+    valueKey: activeSection.value as keyof SongStats
+  }
+})
+
 async function saveElementAsImage(element: HTMLElement | null, fileName: string) {
   if (!element || isSaving.value) return
   isSaving.value = true
@@ -148,46 +171,64 @@ async function copyDataToClipboard() {
 </script>
 
 <template>
-  <div class="container" ref="fullReportRef">
+  <div class="container">
     <div v-if="notice" class="notice">{{ notice }}</div>
     
     <template v-else>
-      <div class="overview-section" ref="overviewRef">
-        <div class="section-header">
-          <h1>玩家 Rating 及六维雷达图</h1>
-          <button class="save-btn no-capture" @click="saveElementAsImage(overviewRef, 'taiko-overview')">
-            保存概览
-          </button>
-        </div>
-        
-        <div class="summary">
-          <div class="stat-box">
-            <div class="stat-value">{{ overallRating.toFixed(2) }}</div>
-            <div class="stat-label">Rating</div>
+      <div class="report-layout">
+        <!-- Sidebar -->
+        <div class="sidebar no-capture">
+          <div class="sidebar-menu">
+            <div 
+              v-for="item in menuItems" 
+              :key="item.id"
+              class="sidebar-item"
+              :class="{ active: activeSection === item.id }"
+              @click="activeSection = item.id"
+            >
+              {{ item.label }}
+            </div>
           </div>
         </div>
 
-        <div class="chart-container">
-          <RadarChart :data="radarData" />
+        <!-- Content Area -->
+        <div class="content-area" ref="contentRef">
+          <div class="content-header no-capture">
+            <button @click="saveElementAsImage(contentRef, `taiko-${activeSection}`)" class="action-btn save-btn">
+              保存当前页面
+            </button>
+            <button @click="copyDataToClipboard" class="action-btn copy-btn" :class="{ success: copySuccess }">
+              {{ copySuccess ? '✓ 已复制' : '复制数据' }}
+            </button>
+            <button @click="router.push('/')" class="action-btn back-btn">返回首页</button>
+          </div>
+
+          <!-- Overview Section -->
+          <div v-if="activeSection === 'overview'" class="overview-section">
+            <div class="section-header">
+              <h1>玩家 Rating 及六维雷达图</h1>
+            </div>
+            
+            <div class="summary">
+              <div class="stat-box">
+                <div class="stat-value">{{ overallRating.toFixed(2) }}</div>
+                <div class="stat-label">Rating</div>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <RadarChart :data="radarData" />
+            </div>
+          </div>
+
+          <!-- Top Tables -->
+          <TopTable 
+            v-else-if="currentTableData"
+            :title="currentTableData.title" 
+            :data="currentTableData.data" 
+            :valueKey="currentTableData.valueKey" 
+          />
         </div>
-      </div>
-
-      <TopTable title="Rating Top 20" :data="topLists.rating" valueKey="rating" />
-      <TopTable title="大歌力 Top 20" :data="topLists.daigouryoku" valueKey="daigouryoku" />
-      <TopTable title="体力 Top 20" :data="topLists.stamina" valueKey="stamina" />
-      <TopTable title="高速处理 Top 20" :data="topLists.speed" valueKey="speed" />
-      <TopTable title="精度力 Top 20" :data="topLists.accuracy_power" valueKey="accuracy_power" />
-      <TopTable title="节奏处理 Top 20" :data="topLists.rhythm" valueKey="rhythm" />
-      <TopTable title="复合处理 Top 20" :data="topLists.complex" valueKey="complex" />
-
-      <div class="button-group no-capture">
-        <button @click="saveElementAsImage(fullReportRef, 'taiko-full-report')" class="action-btn save-full-btn">
-          保存完整报告
-        </button>
-        <button @click="copyDataToClipboard" class="copy-btn" :class="{ success: copySuccess }">
-          {{ copySuccess ? '✓ 已复制' : '复制数据' }}
-        </button>
-        <button @click="router.push('/')" class="back-btn">返回</button>
       </div>
     </template>
   </div>
@@ -195,65 +236,80 @@ async function copyDataToClipboard() {
 
 <style scoped>
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   background: white;
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  min-height: 600px;
+}
+
+.report-layout {
+  display: flex;
+  gap: 20px;
+  min-height: 500px;
+}
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+  padding-right: 20px;
+}
+
+.sidebar-menu {
+  flex: 1;
+}
+
+.sidebar-item {
+  padding: 12px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  color: #666;
+  transition: all 0.3s;
+}
+
+.sidebar-item:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.sidebar-item.active {
+  background-color: #e91e63;
+  color: white;
+}
+
+.content-area {
+  flex: 1;
+  padding-left: 10px;
+  position: relative;
+}
+
+.content-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-right: 10px;
 }
 
 .overview-section {
-  position: relative;
   padding: 10px;
-  background: white;
-  border-radius: 8px;
 }
 
 .section-header {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   margin-bottom: 20px;
-}
-
-.save-btn {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 6px 12px;
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.save-btn:hover {
-  background-color: #c2185b;
-}
-
-h1 {
-  text-align: center;
-  color: #333;
-  margin: 0;
-}
-
-.notice {
-  text-align: center;
-  color: #888;
-  margin: 10px 0;
 }
 
 .summary {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-bottom: 30px;
-  flex-wrap: wrap;
 }
 
 .stat-box {
@@ -261,12 +317,11 @@ h1 {
   background: #f8f9fa;
   padding: 15px;
   border-radius: 8px;
-  margin: 5px;
-  min-width: 100px;
+  min-width: 120px;
 }
 
 .stat-value {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #e91e63;
 }
@@ -277,44 +332,40 @@ h1 {
 }
 
 .chart-container {
-  position: relative;
   height: 400px;
   width: 100%;
-  margin-bottom: 40px;
 }
 
-.button-group {
+.content-actions {
+  margin-top: 30px;
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  justify-content: center;
 }
 
-.action-btn, .copy-btn, .back-btn {
-  flex: 1;
-  padding: 12px;
+.action-btn {
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.3s;
   color: white;
+  text-align: center;
 }
 
-.save-full-btn {
+.save-btn {
   background: #2196f3;
 }
-.save-full-btn:hover {
+.save-btn:hover {
   background: #1976d2;
 }
 
 .copy-btn {
   background: #e91e63;
 }
-
 .copy-btn:hover {
   background: #c2185b;
 }
-
 .copy-btn.success {
   background: #4caf50;
 }
@@ -322,8 +373,13 @@ h1 {
 .back-btn {
   background: #666;
 }
-
 .back-btn:hover {
   background: #555;
+}
+
+.notice {
+  text-align: center;
+  color: #888;
+  margin: 20px 0;
 }
 </style>
