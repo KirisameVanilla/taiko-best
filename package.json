@@ -8,8 +8,7 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
-    "extract-songs": "node extract-songs.mjs",
-    "postinstall": "npm run extract-songs || echo 'Warning: Failed to extract songs.json'"
+    "extract-songs": "node extract-songs.mjs"
   },
   "dependencies": {
     "chart.js": "^4.4.0",
