@@ -229,25 +229,29 @@ export function calculateSongStats(songData: SongData, userScore: UserScore): So
  * - r[13] → updatedAt: 更新时间
  */
 export function parsePastedScores(raw: string | any[]): UserScore[] {
-  const arr = typeof raw === 'string' ? JSON.parse(raw) : raw
-  if (!Array.isArray(arr)) return []
-  
-  return arr.map(r => ({
-    id: Number(r[0]),
-    level: Number(r[1]),
-    score: Number(r[2]) || 0,
-    scoreRank: Number(r[3]) || 0,
-    great: Number(r[4]) || 0,
-    good: Number(r[5]) || 0,
-    bad: Number(r[6]) || 0,
-    drumroll: Number(r[7]) || 0,
-    combo: Number(r[8]) || 0,
-    playCount: Number(r[9]) || 0,
-    clearCount: Number(r[10]) || 0,
-    fullcomboCount: Number(r[11]) || 0,
-    perfectCount: Number(r[12]) || 0,
-    updatedAt: r[13]
-  }))
+    const arr = typeof raw === 'string' ? JSON.parse(raw) : raw
+    if (!Array.isArray(arr)) return []
+
+    return arr.map(r => {
+        const isDondafuru = (Number(r[12]) > 0 && !((r[0] === 775 && r[1] === 4) || (r[0] === 775 && r[1] === 5) || (r[0] === 1032 && r[1] === 5) || (r[0] === 1037 && r[1] === 4)));
+        return {
+            id: Number(r[0]),
+            level: Number(r[1]),
+            score: Number(r[2]) || 0,
+            scoreRank: Number(r[3]) || 0,
+            // 判断是否虹冠，但表里面包米饭、里emma、battleno1除外
+            great: isDondafuru ? (Number(r[4]) + Number(r[5]) + Number(r[6])) || 0 : Number(r[4]) || 0,
+            good: isDondafuru ? 0 : Number(r[5]) || 0,
+            bad: isDondafuru ? 0 : Number(r[6]) || 0,
+            drumroll: Number(r[7]) || 0,
+            combo: Number(r[8]) || 0,
+            playCount: Number(r[9]) || 0,
+            clearCount: Number(r[10]) || 0,
+            fullcomboCount: Number(r[11]) || 0,
+            perfectCount: Number(r[12]) || 0,
+            updatedAt: r[13]
+        };
+    })
 }
 
 /**
