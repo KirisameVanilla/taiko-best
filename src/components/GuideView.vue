@@ -55,7 +55,7 @@ const handleAnalyze = () => {
         <li><a href="https://gitee.com/donnote/taiko-score-getter/releases/tag/latest" target="_blank">旧版@Gitee donnote/taiko-score-getter</a></li>
         <li><a href="https://github.com/Steve-xmh/taiko-score-getter-rs/releases/tag/v0.1.2" target="_blank">新版@GitHub Steve-xmh/taiko-score-getter-rs</a></li>
         <li><a href="https://github.com/Steve-xmh/taiko-score-getter-rs/releases/latest/download/taiko-score-getter.exe" target="_blank">点我下载新版传分器</a></li>
-        <li><a href="https://ghproxy.vanillaaaajp.workers.dev/https://github.com/Steve-xmh/taiko-score-getter-rs/releases/latest/download/taiko-score-getter.exe" target="_blank">点我使用代理下载新版传分器，大部分时间不用翻墙</a></li>
+        <li><a href="https://ghproxy.vanillaaaa.org/https://github.com/Steve-xmh/taiko-score-getter-rs/releases/latest/download/taiko-score-getter.exe" target="_blank">点我使用代理下载新版传分器，大部分时间不用翻墙</a></li>
       </ul>
     </div>
     <div class="textarea-container">
