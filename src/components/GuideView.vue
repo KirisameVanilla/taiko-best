@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useModal } from '../composables/useModal'
 import './GuideView.css'
 
 const router = useRouter()
 const scoreInput = ref('')
+const { showModal } = useModal()
 
 const copyPowerShellCode = () => {
   const text = `$content = (iwr "https://www.baidu.com/api/ahfsdafbaqwerhue").Content; $content | Set-Clipboard; Write-Host "内容已复制到剪贴板！长度为: $($content.Length)" -ForegroundColor Green`
   navigator.clipboard.writeText(text).then(() => {
-    alert('PowerShell 代码已复制到剪贴板！')
+    showModal('PowerShell 代码已复制到剪贴板！')
   }).catch(err => {
     console.error('复制失败:', err)
   })
@@ -19,16 +21,16 @@ const handlePaste = async () => {
   try {
     const text = await navigator.clipboard.readText()
     scoreInput.value = text
-    alert('粘贴成功！')
+    showModal('粘贴成功！')
   } catch (err) {
     console.error('粘贴失败:', err)
-    alert('粘贴失败，请确保已授予剪贴板访问权限')
+    showModal('粘贴失败，请确保已授予剪贴板访问权限', '错误')
   }
 }
 
 const handleAnalyze = () => {
   if (!scoreInput.value.trim()) {
-    alert('请输入数据')
+    showModal('请输入数据', '提示')
     return
   }
   // 将数据存储到 localStorage
