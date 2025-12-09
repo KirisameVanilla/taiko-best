@@ -21,6 +21,8 @@ const { modalState, hideModal } = useModal()
 
 <style scoped>
 #app {
-  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>
