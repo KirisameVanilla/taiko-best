@@ -35,6 +35,27 @@ const filterNotFC = ref(false)
 const filterAP = ref(false)
 const filterNotAP = ref(false)
 
+const copySuccess = ref(false)
+
+async function copyDataToClipboard() {
+  try {
+    const scoreData = localStorage.getItem('taikoScoreData') || ''
+    if (!scoreData) {
+      alert('没有可复制的数据')
+      return
+    }
+    
+    await navigator.clipboard.writeText(scoreData)
+    copySuccess.value = true
+    setTimeout(() => {
+      copySuccess.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('复制失败:', err)
+    alert('复制失败，请手动复制数据')
+  }
+}
+
 // Slider Logic
 const minPos = computed(() => {
   return ((minConstant.value - limitMin.value) / (limitMax.value - limitMin.value)) * 100
@@ -316,6 +337,9 @@ const filteredSongs = computed(() => {
             </div>
           </div>
         </div>
+        <button @click="copyDataToClipboard" class="action-btn copy-btn" :class="{ success: copySuccess }">
+          {{ copySuccess ? '✓ 已复制' : '复制数据' }}
+        </button>
         <span class="count">共 {{ filteredSongs.length }} 首</span>
       </div>
     </div>
@@ -656,5 +680,27 @@ tr:hover {
   text-align: center;
   padding: 40px;
   color: #666;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: white;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.copy-btn {
+  background: #e91e63;
+}
+.copy-btn:hover {
+  background: #c2185b;
+}
+.copy-btn.success {
+  background: #4caf50;
 }
 </style>

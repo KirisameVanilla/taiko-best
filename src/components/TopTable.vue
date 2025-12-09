@@ -50,17 +50,17 @@ const formatValue = (item: SongStats, key: keyof SongStats): string => {
 
 <style scoped>
 .table-section {
-  margin-top: 30px;
+  margin-top: 0;
   background: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
 }
 
 .section-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .save-btn {

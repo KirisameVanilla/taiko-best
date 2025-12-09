@@ -54,6 +54,9 @@ const createChart = () => {
       }]
     },
     options: {
+      layout: {
+        padding: 20
+      },
       scales: {
         r: {
           suggestedMin: minVal > 0 ? minVal : 0,

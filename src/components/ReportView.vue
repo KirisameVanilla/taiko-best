@@ -26,7 +26,6 @@ const radarData = ref({
   rhythm: 0,
   complex: 0
 })
-const copySuccess = ref(false)
 const contentRef = ref<HTMLElement | null>(null)
 const isSaving = ref(false)
 
@@ -150,25 +149,6 @@ async function saveElementAsImage(element: HTMLElement | null, fileName: string)
     isSaving.value = false
   }
 }
-
-async function copyDataToClipboard() {
-  try {
-    const scoreData = localStorage.getItem('taikoScoreData') || ''
-    if (!scoreData) {
-      alert('没有可复制的数据')
-      return
-    }
-    
-    await navigator.clipboard.writeText(scoreData)
-    copySuccess.value = true
-    setTimeout(() => {
-      copySuccess.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('复制失败:', err)
-    alert('复制失败，请手动复制数据')
-  }
-}
 </script>
 
 <template>
@@ -194,16 +174,6 @@ async function copyDataToClipboard() {
 
         <!-- Content Area -->
         <div class="content-area" ref="contentRef">
-          <div class="content-header no-capture">
-            <button @click="saveElementAsImage(contentRef, `taiko-${activeSection}`)" class="action-btn save-btn">
-              保存当前页面
-            </button>
-            <button @click="copyDataToClipboard" class="action-btn copy-btn" :class="{ success: copySuccess }">
-              {{ copySuccess ? '✓ 已复制' : '复制数据' }}
-            </button>
-            <button @click="router.push('/')" class="action-btn back-btn">返回首页</button>
-          </div>
-
           <!-- Overview Section -->
           <div v-if="activeSection === 'overview'" class="overview-section">
             <div class="section-header">
@@ -223,13 +193,21 @@ async function copyDataToClipboard() {
           </div>
 
           <!-- Top Tables -->
-          <TopTable 
-            v-else-if="currentTableData"
-            :title="currentTableData.title" 
-            :data="currentTableData.data" 
-            :valueKey="currentTableData.valueKey" 
-          />
+          <div v-else-if="currentTableData" class="table-section">
+            <TopTable 
+              :title="currentTableData.title" 
+              :data="currentTableData.data" 
+              :valueKey="currentTableData.valueKey" 
+            />
+          </div>
         </div>
+      </div>
+
+      <!-- Floating Action Button -->
+      <div class="floating-actions no-capture">
+        <button @click="saveElementAsImage(contentRef, `taiko-${activeSection}`)" class="floating-btn save-btn" title="保存当前页面">
+          <span class="icon">📷</span>
+        </button>
       </div>
     </template>
   </div>
@@ -290,27 +268,30 @@ async function copyDataToClipboard() {
   position: relative;
 }
 
-.content-header {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding-right: 10px;
-}
-
 .overview-section {
-  padding: 10px;
+  padding: 0 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .section-header {
   text-align: center;
   margin-bottom: 20px;
+  width: 100%;
+}
+
+.section-header h1 {
+  margin: 0;
+  font-size: 24px; /* Match h2 size usually, or keep it larger but remove margin */
+  color: #333;
 }
 
 .summary {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .stat-box {
@@ -335,6 +316,7 @@ async function copyDataToClipboard() {
 .chart-container {
   height: 400px;
   width: 100%;
+  max-width: 700px;
 }
 
 .content-actions {
@@ -371,16 +353,44 @@ async function copyDataToClipboard() {
   background: #4caf50;
 }
 
-.back-btn {
-  background: #666;
-}
-.back-btn:hover {
-  background: #555;
-}
-
 .notice {
   text-align: center;
   color: #888;
   margin: 20px 0;
+}
+
+.floating-actions {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.floating-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.floating-btn:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  line-height: 1;
 }
 </style>
