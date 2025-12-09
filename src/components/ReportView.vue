@@ -36,9 +36,9 @@ const menuItems = [
   { id: 'overview', label: '概览' },
   { id: 'rating', label: 'Rating' },
   { id: 'daigouryoku', label: '大歌力' },
-  { id: 'stamina', label: '耐力' },
-  { id: 'speed', label: '高速' },
-  { id: 'accuracy_power', label: '精度' },
+  { id: 'stamina', label: '体力' },
+  { id: 'speed', label: '高速力' },
+  { id: 'accuracy_power', label: '精度力' },
   { id: 'rhythm', label: '节奏处理' },
   { id: 'complex', label: '复合处理' }
 ]
