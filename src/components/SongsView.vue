@@ -2,7 +2,8 @@
 import { ref, onMounted, computed, watch } from 'vue'
 import { loadSongsData } from '../data/songs'
 import { parsePastedScores, calculateSongStats } from '../utils/calculator'
-import type { UserScore, SongStats } from '../types'
+import type { UserScore, SongStats, SongsDatabase } from '../types'
+import EditScoreModal from './EditScoreModal.vue'
 
 interface SongRow {
   id: string
@@ -16,8 +17,133 @@ interface SongRow {
 type SortKey = 'title' | 'constant' | 'score' | 'rating' | 'great' | 'good' | 'bad' | 'drumroll' | 'combo' | 'updatedAt'
 
 const songs = ref<SongRow[]>([])
+const songsDB = ref<SongsDatabase | null>(null)
 const loading = ref(true)
 const searchTerm = ref('')
+
+// Edit Modal State
+const showEditModal = ref(false)
+const editingSong = ref<SongRow | null>(null)
+
+const openEditModal = (song: SongRow) => {
+  editingSong.value = song
+  showEditModal.value = true
+}
+
+const closeEditModal = () => {
+  showEditModal.value = false
+  editingSong.value = null
+}
+
+const userScoreToArray = (s: UserScore): any[] => {
+  return [
+    s.id,
+    s.level,
+    s.score,
+    s.scoreRank,
+    s.great,
+    s.good,
+    s.bad,
+    s.drumroll,
+    s.combo,
+    s.playCount,
+    s.clearCount,
+    s.fullcomboCount,
+    s.perfectCount,
+    s.updatedAt
+  ]
+}
+
+const updateLocalStorage = (newScore: UserScore) => {
+  const scoreData = localStorage.getItem('taikoScoreData') || '[]'
+  let rawScores: any[] = []
+  try {
+    rawScores = JSON.parse(scoreData)
+  } catch (e) {
+    rawScores = []
+  }
+  
+  // Remove existing score for this song/level
+  // rawScores is array of arrays
+  rawScores = rawScores.filter((r: any[]) => !(Number(r[0]) === newScore.id && Number(r[1]) === newScore.level))
+  
+  // Add new score
+  rawScores.push(userScoreToArray(newScore))
+  
+  localStorage.setItem('taikoScoreData', JSON.stringify(rawScores))
+}
+
+const removeFromLocalStorage = (id: number, level: number) => {
+  const scoreData = localStorage.getItem('taikoScoreData') || '[]'
+  let rawScores: any[] = []
+  try {
+    rawScores = JSON.parse(scoreData)
+  } catch (e) {
+    rawScores = []
+  }
+  
+  rawScores = rawScores.filter((r: any[]) => !(Number(r[0]) === id && Number(r[1]) === level))
+  
+  localStorage.setItem('taikoScoreData', JSON.stringify(rawScores))
+}
+
+const handleSaveScore = (scoreData: Partial<UserScore>) => {
+  if (!editingSong.value) return
+
+  const song = editingSong.value
+  const [idStr, levelStr] = song.id.split('-')
+  const id = parseInt(idStr)
+  const level = parseInt(levelStr)
+  
+  const newScore: UserScore = {
+    id,
+    level,
+    score: scoreData.score || 0,
+    scoreRank: 0, 
+    great: scoreData.great || 0,
+    good: scoreData.good || 0,
+    bad: scoreData.bad || 0,
+    drumroll: scoreData.drumroll || 0,
+    combo: scoreData.combo || 0,
+    playCount: song.userScore?.playCount || 1,
+    clearCount: song.userScore?.clearCount || 0,
+    fullcomboCount: (scoreData.bad || 0) > 0 ? 0 : (song.userScore?.fullcomboCount || 0),
+    perfectCount: ((scoreData.good || 0) > 0 || (scoreData.bad || 0) > 0) ? 0 : (song.userScore?.perfectCount || 0),
+    updatedAt: new Date().toISOString()
+  }
+  
+  // Update local state
+  song.userScore = newScore
+  
+  // Recalculate stats
+  if (songsDB.value) {
+     const data = songsDB.value[song.id]
+     if (data) {
+        const stats = calculateSongStats(data, newScore)
+        if (stats) {
+           song.stats = stats
+        }
+     }
+  }
+
+  updateLocalStorage(newScore)
+  closeEditModal()
+}
+
+const handleClearScore = () => {
+  if (!editingSong.value) return
+  
+  const song = editingSong.value
+  const [idStr, levelStr] = song.id.split('-')
+  const id = parseInt(idStr)
+  const level = parseInt(levelStr)
+
+  song.userScore = undefined
+  song.stats = undefined
+  
+  removeFromLocalStorage(id, level)
+  closeEditModal()
+}
 
 // Filter State
 const showFilter = ref(false)
@@ -81,7 +207,8 @@ const difficultyMap: Record<number, string> = {
 
 onMounted(async () => {
   try {
-    const songsDB = await loadSongsData()
+    const db = await loadSongsData()
+    songsDB.value = db
     const scoreInput = localStorage.getItem('taikoScoreData') || ''
     const userScores = scoreInput ? parsePastedScores(scoreInput) : []
     
@@ -91,7 +218,7 @@ onMounted(async () => {
     })
 
     const rows: SongRow[] = []
-    for (const [key, data] of Object.entries(songsDB)) {
+    for (const [key, data] of Object.entries(db)) {
       const [, levelStr] = key.split('-')
       const level = parseInt(levelStr)
       
@@ -384,7 +511,7 @@ const filteredSongs = computed(() => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="song in filteredSongs" :key="song.id">
+          <tr v-for="song in filteredSongs" :key="song.id" @click="openEditModal(song)" class="song-row">
             <td class="title-cell">{{ song.title }}</td>
             <td>
               <span :class="['difficulty-badge', `diff-${song.level}`]">
@@ -411,6 +538,16 @@ const filteredSongs = computed(() => {
         </tbody>
       </table>
     </div>
+
+    <EditScoreModal
+      :show="showEditModal"
+      :title="editingSong?.title || ''"
+      :initial-score="editingSong?.userScore"
+      :song-data="editingSong && songsDB ? songsDB[editingSong.id] : undefined"
+      @close="closeEditModal"
+      @save="handleSaveScore"
+      @clear="handleClearScore"
+    />
 
     <Teleport to="body">
       <Transition name="tooltip-fade">
@@ -496,6 +633,15 @@ const filteredSongs = computed(() => {
 
 .filter-btn:hover {
   background-color: #f8f9fa;
+}
+
+.song-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.song-row:hover {
+  background-color: #f3f4f6;
 }
 
 .filter-popup {
