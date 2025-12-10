@@ -55,11 +55,14 @@ const createChart = () => {
     },
     options: {
       layout: {
-        padding: 20
+        padding: 10
       },
       scales: {
         r: {
           suggestedMin: minVal > 0 ? minVal : 0,
+          pointLabels: {
+            padding: 20
+          },
           ticks: {
             display: true,
             backdropColor: 'transparent',
@@ -75,9 +78,12 @@ const createChart = () => {
         datalabels: {
           anchor: 'end',
           align: 'end',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          borderRadius: 4,
+          padding: 2,
           formatter: (value: number) => Number(value).toFixed(2),
           font: {
-            size: 12,
+            size: 14,
             weight: 'bold'
           },
           color: '#e91e63'
@@ -93,7 +99,6 @@ onMounted(() => {
   createChart()
 })
 
-// 监听数据变化,重新绘制图表
 watch(() => props.data, () => {
   createChart()
 }, { deep: true })
