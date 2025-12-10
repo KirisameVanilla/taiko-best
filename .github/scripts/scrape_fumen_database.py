@@ -1,0 +1,298 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+import time
+import re
+
+
+def scrape_fumen_database():
+    """
+    爬取 fumen-database.com 的难度列表页面，
+    提取所有歌曲的链接
+    """
+    url = "https://fumen-database.com/difficulty/?const_desc"
+
+    # 设置请求头，模拟浏览器访问
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+
+    try:
+        print(f"正在访问: {url}")
+        response = requests.get(url, headers=headers, timeout=30)
+        response.raise_for_status()
+        response.encoding = "utf-8"
+
+        # 使用 BeautifulSoup 解析 HTML
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        # 查找目标容器
+        top_wrapper = soup.find("div", class_="top-wrapper")
+
+        if not top_wrapper:
+            print("未找到 top-wrapper")
+            return []
+
+        table_song_data_wrapper = top_wrapper.find(
+            "div", class_="table_song_data-wrapper"
+        )
+
+        if not table_song_data_wrapper:
+            print("未找到 table_song_data-wrapper")
+            return []
+
+        table_song_data = table_song_data_wrapper.find("div", class_="table_song_data")
+
+        if not table_song_data:
+            print("未找到 table_song_data")
+            return []
+
+        # 提取所有包含 table_song_name 的链接
+        song_links = []
+        song_name_divs = table_song_data.find_all(
+            "div", class_=lambda x: x and "table_song_name" in x
+        )
+
+        print(f"找到 {len(song_name_divs)} 个歌曲条目")
+
+        for div in song_name_divs:
+            a_tag = div.find("a")
+            if a_tag and a_tag.get("href"):
+                href = a_tag.get("href")
+                # 如果是相对路径，转换为完整 URL
+                if href.startswith("/"):
+                    href = f"https://fumen-database.com{href}"
+
+                song_info = {"href": href, "title": a_tag.get_text(strip=True)}
+                song_links.append(song_info)
+
+        return song_links
+
+    except requests.exceptions.RequestException as e:
+        print(f"请求错误: {e}")
+        return []
+    except Exception as e:
+        print(f"解析错误: {e}")
+        return []
+
+
+def extract_song_id_from_url(url):
+    """从 URL 中提取歌曲 ID (xxx-x 部分)"""
+    match = re.search(r"/song/([^/]+)/", url)
+    if match:
+        return match.group(1)
+    return None
+
+
+def parse_script_data(soup):
+    """解析页面中的 script nonce 数据"""
+    script_tags = soup.find_all("script", {"nonce": True})
+
+    for script in script_tags:
+        script_content = script.string
+        if script_content and "song_name" in script_content:
+            # 尝试提取 JavaScript 对象数据
+            try:
+                # 查找 const xxx = {...}; 或 var xxx = {...};
+                match = re.search(
+                    r"(?:const|var|let)\s+(\w+)\s*=\s*\{([^}]+)\};",
+                    script_content,
+                    re.DOTALL,
+                )
+                if match:
+                    obj_content = match.group(2)
+
+                    # 解析对象内容，提取键值对
+                    data = {}
+                    # 匹配格式: key: 'value' 或 key: "value"
+                    pairs = re.findall(r'(\w+)\s*:\s*[\'"]([^\'"]*)[\'"]', obj_content)
+
+                    for key, value in pairs:
+                        # 尝试转换数字
+                        try:
+                            # 如果是数字，转换为 float
+                            if "." in value:
+                                data[key] = float(value)
+                            else:
+                                data[key] = int(value)
+                        except ValueError:
+                            # 如果不是数字，保持字符串
+                            data[key] = value
+
+                    if data:
+                        return data
+            except Exception as e:
+                print(f"  解析 script 数据失败: {e}")
+                continue
+
+    return None
+
+
+def scrape_song_detail(url):
+    """
+    爬取单个歌曲详情页
+    提取 constant, totalNotes 和雷达图数据
+    """
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+
+    try:
+        print(f"  正在爬取: {url}")
+        response = requests.get(url, headers=headers, timeout=30)
+        response.raise_for_status()
+        response.encoding = "utf-8"
+
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        # 提取 song_id
+        song_id = extract_song_id_from_url(url)
+        if not song_id:
+            print("  ✗ 无法从 URL 提取歌曲 ID")
+            return None
+
+        # 解析 script nonce 中的数据
+        script_data = parse_script_data(soup)
+        if not script_data:
+            print("  ✗ 未找到 script 数据")
+            return None
+
+        # 提取 constant
+        constant = None
+        top_wrapper = soup.find("div", class_="top-wrapper")
+        if top_wrapper:
+            const_area = top_wrapper.find("div", class_="const_area")
+            if const_area:
+                p_tags = const_area.find_all("p")
+                for p in p_tags:
+                    span = p.find("span", id="score_const_origin")
+                    if span:
+                        const_text = span.get_text(strip=True)
+                        try:
+                            constant = float(const_text)
+                        except ValueError:
+                            print(f"  ✗ 无法解析 constant: {const_text}")
+                        break
+
+        # 提取 totalNotes
+        total_notes = None
+        song_info_div = soup.find("div", class_="song_info")
+        if song_info_div:
+            song_info_area = song_info_div.find("div", class_="song_info_area")
+            if song_info_area:
+                divs = song_info_area.find_all("div")
+                for div in divs:
+                    # 查找包含 title_combo 的 img
+                    img = div.find("img", src=lambda x: x and "title_combo" in x)
+                    if img:
+                        # 找到这个 div 中的 p 标签
+                        p_tag = div.find("p")
+                        if p_tag:
+                            notes_text = p_tag.get_text(strip=True)
+                            try:
+                                total_notes = int(notes_text)
+                            except ValueError:
+                                print(f"  ✗ 无法解析 totalNotes: {notes_text}")
+                        break
+
+        # 构建结果
+        result = {
+            "title": script_data.get("song_name", "")
+            .replace(" （おに裏）", "(裏)")
+            .replace(" （おに）", ""),
+            "constant": constant,
+            "totalNotes": total_notes,
+            "composite": script_data.get("radar_compound", None),
+            "avgDensity": script_data.get("radar_density_ave", None),
+            "instDensity": script_data.get("radar_density_inst", None),
+            "separation": script_data.get("radar_division", None),
+            "bpmChange": script_data.get("radar_change_bpm", None),
+            "hsChange": script_data.get("radar_change_hs", None),
+        }
+
+        print(f"  ✓ {result['title']} - Constant: {constant}, Notes: {total_notes}")
+        return song_id, result
+
+    except requests.exceptions.RequestException as e:
+        print(f"  ✗ 请求错误: {e}")
+        return None
+    except Exception as e:
+        print(f"  ✗ 解析错误: {e}")
+        import traceback
+
+        traceback.print_exc()
+        return None
+
+
+def save_to_json(data, filename="song_data.json"):
+    """将数据保存为 JSON 文件"""
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print(f"\n数据已保存到 {filename}")
+
+
+if __name__ == "__main__":
+    print("开始爬取 fumen-database.com...")
+    print("=" * 50)
+
+    # 第一步：获取所有歌曲链接
+    song_links = scrape_fumen_database()
+
+    print("=" * 50)
+    print(f"\n总共找到 {len(song_links)} 个歌曲")
+
+    if not song_links:
+        print("未找到任何歌曲链接")
+        exit(1)
+
+    # 第二步：爬取每个歌曲的详细信息
+    print("\n开始爬取歌曲详情...")
+    print("=" * 50)
+
+    all_songs_data = {}
+    success_count = 0
+    fail_count = 0
+    fails = []
+    max_retries = 5
+
+    for i, song_link in enumerate(song_links, 1):
+        print(f"\n[{i}/{len(song_links)}] {song_link['title']}")
+
+        result = None
+        retry_count = 0
+
+        # 重试机制：最多尝试5次
+        while retry_count < max_retries and result is None:
+            if retry_count > 0:
+                print(f"  → 第 {retry_count + 1} 次尝试...")
+                time.sleep(2)  # 重试前等待2秒
+
+            result = scrape_song_detail(song_link["href"])
+            retry_count += 1
+
+        if result:
+            song_id, song_data = result
+            all_songs_data[song_id] = song_data
+            success_count += 1
+        else:
+            fail_count += 1
+            fails.append(song_link["title"])
+            print(f"  ✗ 爬取失败（已重试 {max_retries} 次）")
+
+        # 添加延迟，避免请求过快
+        if i < len(song_links):
+            time.sleep(1)  # 每个请求间隔1秒
+
+    print("\n" + "=" * 50)
+    print("爬取完成！")
+    print(f"成功: {success_count} 个")
+    print(f"失败: {fail_count} 个")
+
+    if fails:
+        print("\n以下歌曲爬取失败：")
+        for fail in fails:
+            print(f"  - {fail}")
+
+    if all_songs_data:
+        # 保存到 JSON 文件
+        save_to_json(all_songs_data, "public/songs.json")
