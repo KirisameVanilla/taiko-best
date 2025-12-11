@@ -418,7 +418,7 @@
     "hsChange": 78.3
   },
   "1406-4": {
-    "title": "siren's eye",
+    "title": "siren",
     "constant": 11.1,
     "totalNotes": 997,
     "composite": 23.05,
@@ -495,7 +495,7 @@
     "hsChange": 0
   },
   "393-4": {
-    "title": "双竜ノ乱",
+    "title": "双竜ノ乱 ",
     "constant": 11.1,
     "totalNotes": 970,
     "composite": 51.38,
@@ -517,8 +517,8 @@
     "hsChange": 22.66
   },
   "283-5": {
-    "title": "初音ミクの消失‐劇場版‐(裏)",
-    "constant": 11,
+    "title": "初音ミクの消失-劇場版-(裏)",
+    "constant": 11.0,
     "totalNotes": 999,
     "composite": 80.81,
     "avgDensity": 77.66,
@@ -529,7 +529,7 @@
   },
   "1310-5": {
     "title": "Genesis Ray(裏)",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 985,
     "composite": 30.32,
     "avgDensity": 65.17,
@@ -540,7 +540,7 @@
   },
   "1411-5": {
     "title": "Lightning Boys(裏)",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 1030,
     "composite": 80.57,
     "avgDensity": 83.74,
@@ -551,7 +551,7 @@
   },
   "1215-5": {
     "title": "Nosferatu(裏)",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 1353,
     "composite": 45.04,
     "avgDensity": 90.01,
@@ -562,7 +562,7 @@
   },
   "1099-4": {
     "title": "Challengers",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 753,
     "composite": 36.84,
     "avgDensity": 43.73,
@@ -573,7 +573,7 @@
   },
   "1066-4": {
     "title": "たいこの2000",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 1008,
     "composite": 56.78,
     "avgDensity": 66.91,
@@ -584,7 +584,7 @@
   },
   "1052-5": {
     "title": "仮想現実のテレスコープ(裏)",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 1176,
     "composite": 55.74,
     "avgDensity": 67.3,
@@ -595,7 +595,7 @@
   },
   "1041-4": {
     "title": "†バチ!ムチ!?マッスルキングダム†",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 961,
     "composite": 54.51,
     "avgDensity": 61.63,
@@ -606,7 +606,7 @@
   },
   "993-4": {
     "title": "彁",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 692,
     "composite": 27.24,
     "avgDensity": 28.21,
@@ -617,7 +617,7 @@
   },
   "890-4": {
     "title": "わら得る2000",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 818,
     "composite": 60.8,
     "avgDensity": 48.39,
@@ -628,7 +628,7 @@
   },
   "896-4": {
     "title": "続・〆ドレー2000",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 940,
     "composite": 49.89,
     "avgDensity": 59.13,
@@ -638,8 +638,8 @@
     "hsChange": 86.92
   },
   "858-4": {
-    "title": "UFO Swingin’",
-    "constant": 11,
+    "title": "UFO Swingin",
+    "constant": 11.0,
     "totalNotes": 756,
     "composite": 32.91,
     "avgDensity": 68.4,
@@ -650,7 +650,7 @@
   },
   "778-4": {
     "title": "λ7708",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 788,
     "composite": 17.64,
     "avgDensity": 61.34,
@@ -661,7 +661,7 @@
   },
   "764-4": {
     "title": "Coquette",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 1022,
     "composite": 88.11,
     "avgDensity": 81.02,
@@ -672,7 +672,7 @@
   },
   "186-4": {
     "title": "Hurtling Boys",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 903,
     "composite": 78.66,
     "avgDensity": 72.2,
@@ -683,7 +683,7 @@
   },
   "451-5": {
     "title": "Xa(裏)",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 904,
     "composite": 42,
     "avgDensity": 67.77,
@@ -694,7 +694,7 @@
   },
   "700-5": {
     "title": "Taiko Drum Monster(裏)",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 1044,
     "composite": 46.6,
     "avgDensity": 70.2,
@@ -705,7 +705,7 @@
   },
   "401-4": {
     "title": "スーハー2000",
-    "constant": 11,
+    "constant": 11.0,
     "totalNotes": 668,
     "composite": 37.62,
     "avgDensity": 32.22,
@@ -1100,7 +1100,7 @@
     "hsChange": 42.31
   },
   "818-4": {
-    "title": "Don’t Stop the Game",
+    "title": "Don",
     "constant": 10.8,
     "totalNotes": 846,
     "composite": 56.93,
@@ -1254,7 +1254,7 @@
     "hsChange": 7.01
   },
   "1086-4": {
-    "title": "Player's High",
+    "title": "Player",
     "constant": 10.7,
     "totalNotes": 913,
     "composite": 26.45,
@@ -1342,7 +1342,7 @@
     "hsChange": 0
   },
   "762-4": {
-    "title": "Toon Town’s Toys’ Tune",
+    "title": "Toon Town",
     "constant": 10.7,
     "totalNotes": 659,
     "composite": 12.1,
@@ -1628,7 +1628,7 @@
     "hsChange": 23.74
   },
   "835-4": {
-    "title": "What’s in the box？",
+    "title": "What",
     "constant": 10.6,
     "totalNotes": 750,
     "composite": 71.3,
@@ -1771,7 +1771,7 @@
     "hsChange": 4
   },
   "1197-5": {
-    "title": "Re ： End of a Dream(裏)",
+    "title": "Re：End of a Dream(裏)",
     "constant": 10.5,
     "totalNotes": 999,
     "composite": 67.29,
@@ -2365,7 +2365,7 @@
     "hsChange": 63.68
   },
   "714-4": {
-    "title": "OK I’m blue rat",
+    "title": "OK I",
     "constant": 10.4,
     "totalNotes": 816,
     "composite": 61.97,
@@ -2607,7 +2607,7 @@
     "hsChange": 90.06
   },
   "1384-4": {
-    "title": "YOU're your HERO",
+    "title": "YOU",
     "constant": 10.3,
     "totalNotes": 888,
     "composite": 10.55,
@@ -2794,7 +2794,7 @@
     "hsChange": 0
   },
   "128-4": {
-    "title": "D′s Adventure Note",
+    "title": "D",
     "constant": 10.3,
     "totalNotes": 872,
     "composite": 63.52,
@@ -3521,7 +3521,7 @@
   },
   "1352-4": {
     "title": "INTERNET YAMERO",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 976,
     "composite": 33.64,
     "avgDensity": 43.1,
@@ -3532,7 +3532,7 @@
   },
   "1168-5": {
     "title": "オーバード(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 733,
     "composite": 22.12,
     "avgDensity": 45.11,
@@ -3542,8 +3542,8 @@
     "hsChange": 6.04
   },
   "283-4": {
-    "title": "初音ミクの消失‐劇場版‐",
-    "constant": 10,
+    "title": "初音ミクの消失-劇場版-",
+    "constant": 10.0,
     "totalNotes": 765,
     "composite": 8.7,
     "avgDensity": 45.55,
@@ -3554,7 +3554,7 @@
   },
   "730-5": {
     "title": "ヒバナ(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 1037,
     "composite": 48.48,
     "avgDensity": 61.21,
@@ -3565,7 +3565,7 @@
   },
   "118-5": {
     "title": "さちさちにしてあげる♪(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 743,
     "composite": 73.62,
     "avgDensity": 62.19,
@@ -3576,7 +3576,7 @@
   },
   "975-4": {
     "title": "幾望の月",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 839,
     "composite": 72.8,
     "avgDensity": 41.94,
@@ -3587,7 +3587,7 @@
   },
   "574-4": {
     "title": "SstTAarR*",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 848,
     "composite": 33.98,
     "avgDensity": 57.14,
@@ -3598,7 +3598,7 @@
   },
   "361-5": {
     "title": "Venomous(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 765,
     "composite": 20.38,
     "avgDensity": 43.07,
@@ -3608,8 +3608,8 @@
     "hsChange": 82.82
   },
   "929-4": {
-    "title": "waitin' for u",
-    "constant": 10,
+    "title": "waitin",
+    "constant": 10.0,
     "totalNotes": 762,
     "composite": 39.84,
     "avgDensity": 43.76,
@@ -3620,7 +3620,7 @@
   },
   "734-4": {
     "title": "スーパーD＆D ～完全にリードしてアイマイミー～",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 1000,
     "composite": 65.9,
     "avgDensity": 62.38,
@@ -3631,7 +3631,7 @@
   },
   "948-4": {
     "title": "患部で止まってすぐ溶ける ～ 狂気の優曇華院",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 915,
     "composite": 42.16,
     "avgDensity": 55.44,
@@ -3642,7 +3642,7 @@
   },
   "1140-5": {
     "title": "スカーレット警察のゲットーパトロール24時(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 879,
     "composite": 82.57,
     "avgDensity": 59.68,
@@ -3653,7 +3653,7 @@
   },
   "1271-5": {
     "title": "ラ・カンパネラ(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 705,
     "composite": 58.38,
     "avgDensity": 42.9,
@@ -3664,7 +3664,7 @@
   },
   "1421-4": {
     "title": "SUDDEN GUST OC",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 884,
     "composite": 25.25,
     "avgDensity": 54.88,
@@ -3675,7 +3675,7 @@
   },
   "1318-4": {
     "title": "Irregular Clock",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 905,
     "composite": 16.9,
     "avgDensity": 45.24,
@@ -3686,7 +3686,7 @@
   },
   "1279-4": {
     "title": "キャラメル・ジャンキヰ",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 880,
     "composite": 23.49,
     "avgDensity": 39.28,
@@ -3697,7 +3697,7 @@
   },
   "977-4": {
     "title": "Diving Drive",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 892,
     "composite": 81.16,
     "avgDensity": 61.37,
@@ -3708,7 +3708,7 @@
   },
   "938-5": {
     "title": "零の交響曲(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 893,
     "composite": 51.29,
     "avgDensity": 54.93,
@@ -3719,7 +3719,7 @@
   },
   "846-4": {
     "title": "キューティー☆デモニック☆魔人エモ!!",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 1075,
     "composite": 60.82,
     "avgDensity": 60.4,
@@ -3730,7 +3730,7 @@
   },
   "724-4": {
     "title": "よーいドン！",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 777,
     "composite": 41.04,
     "avgDensity": 45.01,
@@ -3741,7 +3741,7 @@
   },
   "715-4": {
     "title": "Blessed Bouquet Buskers",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 868,
     "composite": 36.48,
     "avgDensity": 47.48,
@@ -3752,7 +3752,7 @@
   },
   "615-4": {
     "title": "天狗囃子",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 734,
     "composite": 24.74,
     "avgDensity": 24.53,
@@ -3763,7 +3763,7 @@
   },
   "558-4": {
     "title": "オール・イン・マイハート",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 704,
     "composite": 21.12,
     "avgDensity": 40.92,
@@ -3774,7 +3774,7 @@
   },
   "16-4": {
     "title": "闇の魔法少女",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 1158,
     "composite": 31.53,
     "avgDensity": 65.16,
@@ -3785,7 +3785,7 @@
   },
   "400-5": {
     "title": "セイクリッド ルイン(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 1000,
     "composite": 79.4,
     "avgDensity": 61.22,
@@ -3796,7 +3796,7 @@
   },
   "399-5": {
     "title": "ピコピコ ルイン(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 1000,
     "composite": 79.4,
     "avgDensity": 61.22,
@@ -3807,7 +3807,7 @@
   },
   "45-5": {
     "title": "蒼の旋律(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 976,
     "composite": 40.8,
     "avgDensity": 60.91,
@@ -3818,7 +3818,7 @@
   },
   "513-4": {
     "title": "朱の旋律",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 902,
     "composite": 43.08,
     "avgDensity": 67.25,
@@ -3829,7 +3829,7 @@
   },
   "689-5": {
     "title": "ゴーゴー・キッチン(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 940,
     "composite": 44.98,
     "avgDensity": 63.88,
@@ -3840,7 +3840,7 @@
   },
   "248-5": {
     "title": "LOVE戦!!(裏)",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 942,
     "composite": 63.4,
     "avgDensity": 70.07,
@@ -3851,7 +3851,7 @@
   },
   "73-4": {
     "title": "Black Rose Apostle",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 876,
     "composite": 38.1,
     "avgDensity": 70.46,
@@ -3862,7 +3862,7 @@
   },
   "375-4": {
     "title": "Shiny Kung-fu Revival",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 765,
     "composite": 19.9,
     "avgDensity": 41.6,
@@ -3873,7 +3873,7 @@
   },
   "5-4": {
     "title": "イオシス秋の肉食祭2014",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 848,
     "composite": 44.1,
     "avgDensity": 40.17,
@@ -3884,7 +3884,7 @@
   },
   "686-4": {
     "title": "R.I.",
-    "constant": 10,
+    "constant": 10.0,
     "totalNotes": 925,
     "composite": 52.13,
     "avgDensity": 53.42,
@@ -4290,7 +4290,7 @@
     "hsChange": 11.14
   },
   "159-4": {
-    "title": "Wings of Tomorrow（Tatsujin Mix）",
+    "title": "Wings of Tomorrow(Tatsujin Mix)",
     "constant": 9.8,
     "totalNotes": 765,
     "composite": 34.1,
@@ -4400,7 +4400,7 @@
     "hsChange": 36.57
   },
   "539-5": {
-    "title": "Scream out！ ‐達人Edit.‐(裏)",
+    "title": "Scream out！ -達人Edit.-(裏)",
     "constant": 9.8,
     "totalNotes": 999,
     "composite": 90.2,
@@ -4851,7 +4851,7 @@
     "hsChange": 0
   },
   "776-5": {
-    "title": "GO GET’EM！(裏)",
+    "title": "GO GET",
     "constant": 9.7,
     "totalNotes": 648,
     "composite": 54.93,
@@ -4862,7 +4862,7 @@
     "hsChange": 0
   },
   "526-4": {
-    "title": "Heaven’s Rider",
+    "title": "Heaven",
     "constant": 9.7,
     "totalNotes": 714,
     "composite": 61.7,
@@ -5643,7 +5643,7 @@
     "hsChange": 19.17
   },
   "776-4": {
-    "title": "GO GET’EM！",
+    "title": "GO GET",
     "constant": 9.5,
     "totalNotes": 555,
     "composite": 44.86,
@@ -5885,7 +5885,7 @@
     "hsChange": 31.09
   },
   "140-5": {
-    "title": "+♂(プラス男子)(裏)",
+    "title": "＋♂(プラス男子)(裏)",
     "constant": 9.4,
     "totalNotes": 900,
     "composite": 49.7,
@@ -6732,7 +6732,7 @@
     "hsChange": 8.29
   },
   "552-4": {
-    "title": "EAT’EM UP！",
+    "title": "EAT",
     "constant": 9.2,
     "totalNotes": 602,
     "composite": 21.45,
@@ -6897,7 +6897,7 @@
     "hsChange": 0
   },
   "259-4": {
-    "title": "The Magician’s Dream",
+    "title": "The Magician",
     "constant": 9.2,
     "totalNotes": 724,
     "composite": 10.86,
@@ -6941,7 +6941,7 @@
     "hsChange": 1.67
   },
   "163-5": {
-    "title": "DON’T CUT(裏)",
+    "title": "DON",
     "constant": 9.2,
     "totalNotes": 754,
     "composite": 36.3,
@@ -7205,7 +7205,7 @@
     "hsChange": 0
   },
   "417-5": {
-    "title": "Grip ＆ Break down !! ‐達人Edit.‐(裏)",
+    "title": "Grip ＆ Break down !! -達人Edit.-(裏)",
     "constant": 9.1,
     "totalNotes": 777,
     "composite": 60.4,
@@ -7415,7 +7415,7 @@
   },
   "1312-5": {
     "title": "誰我為(裏)",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 526,
     "composite": 16.14,
     "avgDensity": 38.49,
@@ -7426,7 +7426,7 @@
   },
   "1180-4": {
     "title": "閃光",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 644,
     "composite": 5.15,
     "avgDensity": 35.82,
@@ -7437,7 +7437,7 @@
   },
   "1343-5": {
     "title": "おはようメルちゃん(裏)",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 566,
     "composite": 25.52,
     "avgDensity": 43,
@@ -7448,7 +7448,7 @@
   },
   "660-4": {
     "title": "エイリアンエイリアン",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 746,
     "composite": 53.22,
     "avgDensity": 35.99,
@@ -7459,7 +7459,7 @@
   },
   "230-4": {
     "title": "The Windmill Song",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 572,
     "composite": 38.32,
     "avgDensity": 31.46,
@@ -7470,7 +7470,7 @@
   },
   "1094-4": {
     "title": "Racing the Storm",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 787,
     "composite": 73.52,
     "avgDensity": 35.23,
@@ -7481,7 +7481,7 @@
   },
   "671-5": {
     "title": "Tulip(裏)",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 677,
     "composite": 42.22,
     "avgDensity": 34.25,
@@ -7492,7 +7492,7 @@
   },
   "487-5": {
     "title": "ラッスンゴレライ(裏)",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 806,
     "composite": 35.72,
     "avgDensity": 44.71,
@@ -7503,7 +7503,7 @@
   },
   "86-4": {
     "title": "クープランの墓",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 651,
     "composite": 48.68,
     "avgDensity": 21.47,
@@ -7514,7 +7514,7 @@
   },
   "1412-4": {
     "title": "案山子姫 -Princess Scarecrow-",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 629,
     "composite": 1.8,
     "avgDensity": 30.4,
@@ -7525,7 +7525,7 @@
   },
   "1364-4": {
     "title": "蒼鷺之火",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 683,
     "composite": 20.26,
     "avgDensity": 30.48,
@@ -7536,7 +7536,7 @@
   },
   "1365-4": {
     "title": "Argent Memories",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 636,
     "composite": 39.78,
     "avgDensity": 28.71,
@@ -7547,7 +7547,7 @@
   },
   "1309-4": {
     "title": "ココドコ？多分ドッカ島！",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 615,
     "composite": 23.68,
     "avgDensity": 19.77,
@@ -7558,7 +7558,7 @@
   },
   "1225-5": {
     "title": "太鼓侍(裏)",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 641,
     "composite": 19.71,
     "avgDensity": 29.86,
@@ -7569,7 +7569,7 @@
   },
   "662-4": {
     "title": "ヒカリノカナタヘ",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 797,
     "composite": 80.8,
     "avgDensity": 41.2,
@@ -7580,7 +7580,7 @@
   },
   "1079-4": {
     "title": "GO ON ～未来へ～",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 720,
     "composite": 14.56,
     "avgDensity": 24.03,
@@ -7591,7 +7591,7 @@
   },
   "852-4": {
     "title": "音虫をつかまえろ！",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 646,
     "composite": 64.78,
     "avgDensity": 41.86,
@@ -7602,7 +7602,7 @@
   },
   "688-4": {
     "title": "星屑とリニアと僕",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 707,
     "composite": 23.7,
     "avgDensity": 32.97,
@@ -7613,7 +7613,7 @@
   },
   "322-4": {
     "title": "ミーナのおやしき",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 607,
     "composite": 20.8,
     "avgDensity": 25.64,
@@ -7624,7 +7624,7 @@
   },
   "180-4": {
     "title": "隼",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 786,
     "composite": 7.24,
     "avgDensity": 33.35,
@@ -7635,7 +7635,7 @@
   },
   "348-5": {
     "title": "らいとにんぐ ぱっしょん(裏)",
-    "constant": 9,
+    "constant": 9.0,
     "totalNotes": 765,
     "composite": 41.32,
     "avgDensity": 40.58,
@@ -7975,7 +7975,7 @@
     "hsChange": 0
   },
   "256-5": {
-    "title": "めざせポケモンマスター ‐20th Anniversary‐(裏)",
+    "title": "めざせポケモンマスター -20th Anniversary-(裏)",
     "constant": 8.8,
     "totalNotes": 416,
     "composite": 24.02,
@@ -8052,7 +8052,7 @@
     "hsChange": 0
   },
   "112-4": {
-    "title": "電車で電車でOPA！OPA！OPA！ ‐ GMT mashup ‐",
+    "title": "電車で電車で OPA!OPA!OPA! -GMT mashup-",
     "constant": 8.8,
     "totalNotes": 658,
     "composite": 28.01,
@@ -8811,7 +8811,7 @@
     "hsChange": 1.54
   },
   "213-4": {
-    "title": "夜想曲Op.9－2",
+    "title": "夜想曲Op.9-2",
     "constant": 8.6,
     "totalNotes": 500,
     "composite": 10.55,
@@ -9125,9 +9125,9 @@
     "composite": 5.2,
     "avgDensity": 36.04,
     "instDensity": 31.02,
-    "separation": 0,
+    "separation": 0.31,
     "bpmChange": 0,
-    "hsChange": 0.31
+    "hsChange": 0
   },
   "730-4": {
     "title": "ヒバナ",
@@ -9867,7 +9867,7 @@
     "hsChange": 0.59
   },
   "237-4": {
-    "title": "おしえて　くまとも",
+    "title": "おしえて くまとも",
     "constant": 8.4,
     "totalNotes": 665,
     "composite": 32.14,
@@ -9955,7 +9955,7 @@
     "hsChange": 20.96
   },
   "113-4": {
-    "title": "電車で電車でGO！GO！GO！GC！ ‐ GMT remix ‐",
+    "title": "電車で電車でGO!GO!GO!GC! -GMT remix-",
     "constant": 8.4,
     "totalNotes": 555,
     "composite": 36.7,
@@ -9977,7 +9977,7 @@
     "hsChange": 0
   },
   "539-4": {
-    "title": "Scream out！ ‐達人Edit.‐",
+    "title": "Scream out！ -達人Edit.-",
     "constant": 8.4,
     "totalNotes": 792,
     "composite": 18.8,
@@ -10164,7 +10164,7 @@
     "hsChange": 0.86
   },
   "163-4": {
-    "title": "DON’T CUT",
+    "title": "DON",
     "constant": 8.4,
     "totalNotes": 704,
     "composite": 4.88,
@@ -10439,7 +10439,7 @@
     "hsChange": 12.14
   },
   "482-5": {
-    "title": "GOIN'!!!(裏)",
+    "title": "GOIN",
     "constant": 8.3,
     "totalNotes": 513,
     "composite": 15.24,
@@ -11044,7 +11044,7 @@
     "hsChange": 0
   },
   "725-4": {
-    "title": "零 ‐ZERO‐",
+    "title": "零 -ZERO-",
     "constant": 8.1,
     "totalNotes": 498,
     "composite": 0,
@@ -11121,7 +11121,7 @@
     "hsChange": 51.37
   },
   "151-4": {
-    "title": "ファンタジーゾーン OPA-OPA！ ‐ GMT remix ‐",
+    "title": "ファンタジーゾーン OPA-OPA! - GMT remix -",
     "constant": 8.1,
     "totalNotes": 537,
     "composite": 11.77,
@@ -11276,7 +11276,7 @@
   },
   "1390-4": {
     "title": "イガク",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 631,
     "composite": 58.65,
     "avgDensity": 36.33,
@@ -11287,7 +11287,7 @@
   },
   "1199-4": {
     "title": "Subtitle",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 279,
     "composite": 18.19,
     "avgDensity": 7.81,
@@ -11298,7 +11298,7 @@
   },
   "1027-4": {
     "title": "夏祭り / ジッタリン・ジン",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 578,
     "composite": 13.44,
     "avgDensity": 22.79,
@@ -11309,7 +11309,7 @@
   },
   "1179-4": {
     "title": "ハルジオン",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 479,
     "composite": 13.94,
     "avgDensity": 35.46,
@@ -11320,7 +11320,7 @@
   },
   "1339-4": {
     "title": "ライラック",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 433,
     "composite": 9.95,
     "avgDensity": 24.95,
@@ -11331,7 +11331,7 @@
   },
   "40-4": {
     "title": "My Soul,Your Beats!",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 444,
     "composite": 11.64,
     "avgDensity": 26.58,
@@ -11342,7 +11342,7 @@
   },
   "1435-4": {
     "title": "モニタリング",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 422,
     "composite": 15.34,
     "avgDensity": 28.5,
@@ -11353,7 +11353,7 @@
   },
   "947-4": {
     "title": "だれかの心臓になれたなら",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 650,
     "composite": 16.64,
     "avgDensity": 28.3,
@@ -11364,7 +11364,7 @@
   },
   "909-4": {
     "title": "キレキャリオン",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 439,
     "composite": 2.92,
     "avgDensity": 28.55,
@@ -11375,7 +11375,7 @@
   },
   "339-4": {
     "title": "Jump Up, Super Star！ Short Version",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 410,
     "composite": 2.55,
     "avgDensity": 14.72,
@@ -11386,7 +11386,7 @@
   },
   "222-4": {
     "title": "メタナイトの逆襲メドレー",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 655,
     "composite": 1.1,
     "avgDensity": 19.26,
@@ -11397,7 +11397,7 @@
   },
   "429-4": {
     "title": "光る闇",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 387,
     "composite": 10.84,
     "avgDensity": 17.76,
@@ -11408,7 +11408,7 @@
   },
   "1252-4": {
     "title": "Neon Sign",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 392,
     "composite": 18.9,
     "avgDensity": 19.95,
@@ -11418,8 +11418,8 @@
     "hsChange": 2.42
   },
   "1197-4": {
-    "title": "Re ： End of a Dream",
-    "constant": 8,
+    "title": "Re：End of a Dream",
+    "constant": 8.0,
     "totalNotes": 602,
     "composite": 0,
     "avgDensity": 18.78,
@@ -11430,7 +11430,7 @@
   },
   "420-4": {
     "title": "月に叢雲華に風",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 382,
     "composite": 3.38,
     "avgDensity": 16.98,
@@ -11441,7 +11441,7 @@
   },
   "81-4": {
     "title": "交響曲第7番から",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 541,
     "composite": 3.9,
     "avgDensity": 21.91,
@@ -11452,7 +11452,7 @@
   },
   "1277-4": {
     "title": "空想打破",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 491,
     "composite": 1.6,
     "avgDensity": 30.48,
@@ -11463,7 +11463,7 @@
   },
   "1274-4": {
     "title": "風魔モジュール6768",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 644,
     "composite": 4.52,
     "avgDensity": 19.36,
@@ -11474,7 +11474,7 @@
   },
   "1031-4": {
     "title": "Hello, Worldooon!!",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 494,
     "composite": 3.3,
     "avgDensity": 16.61,
@@ -11485,7 +11485,7 @@
   },
   "941-4": {
     "title": "Fly again！",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 551,
     "composite": 1.84,
     "avgDensity": 28.58,
@@ -11496,7 +11496,7 @@
   },
   "889-4": {
     "title": "via lactea",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 593,
     "composite": 3.44,
     "avgDensity": 26.68,
@@ -11507,7 +11507,7 @@
   },
   "298-4": {
     "title": "夢幻の蒼空",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 447,
     "composite": 2.4,
     "avgDensity": 27.79,
@@ -11518,7 +11518,7 @@
   },
   "61-4": {
     "title": "オフ♨ロック",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 594,
     "composite": 14.2,
     "avgDensity": 28.57,
@@ -11529,7 +11529,7 @@
   },
   "149-4": {
     "title": "サタデー太鼓フィーバー",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 437,
     "composite": 23.52,
     "avgDensity": 16.79,
@@ -11540,7 +11540,7 @@
   },
   "443-4": {
     "title": "ユウガオノキミ",
-    "constant": 8,
+    "constant": 8.0,
     "totalNotes": 480,
     "composite": 15.95,
     "avgDensity": 16.56,
@@ -11858,7 +11858,7 @@
     "hsChange": 0
   },
   "256-4": {
-    "title": "めざせポケモンマスター ‐20th Anniversary‐",
+    "title": "めざせポケモンマスター -20th Anniversary-",
     "constant": 7.8,
     "totalNotes": 302,
     "composite": 10.18,
@@ -12012,7 +12012,7 @@
     "hsChange": 0
   },
   "1152-4": {
-    "title": "Smile & Go!!",
+    "title": "Smile ＆ Go!!",
     "constant": 7.7,
     "totalNotes": 494,
     "composite": 11.01,
@@ -12463,7 +12463,7 @@
     "hsChange": 1.38
   },
   "345-4": {
-    "title": "ラーメン de Yo‐Men!!",
+    "title": "ラーメン de Yo-Men!!",
     "constant": 7.6,
     "totalNotes": 487,
     "composite": 15.7,
@@ -12980,7 +12980,7 @@
     "hsChange": 3.37
   },
   "140-4": {
-    "title": "+♂(プラス男子)",
+    "title": "＋♂(プラス男子)",
     "constant": 7.4,
     "totalNotes": 583,
     "composite": 2.4,
@@ -13123,7 +13123,7 @@
     "hsChange": 0
   },
   "315-4": {
-    "title": "3Q‐4U‐AC00",
+    "title": "3Q-4U-AC00",
     "constant": 7.4,
     "totalNotes": 539,
     "composite": 0.64,
@@ -13574,7 +13574,7 @@
     "hsChange": 0
   },
   "515-4": {
-    "title": "DREAMERS' PARADISE",
+    "title": "DREAMERS",
     "constant": 7.1,
     "totalNotes": 488,
     "composite": 7.5,
@@ -13717,7 +13717,7 @@
     "hsChange": 0
   },
   "417-4": {
-    "title": "Grip ＆ Break down !! ‐達人Edit.‐",
+    "title": "Grip ＆ Break down !! -達人Edit.-",
     "constant": 7.1,
     "totalNotes": 495,
     "composite": 0,
@@ -13762,7 +13762,7 @@
   },
   "1415-4": {
     "title": "怪獣",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 370,
     "composite": 0.8,
     "avgDensity": 18.51,
@@ -13773,7 +13773,7 @@
   },
   "1385-4": {
     "title": "ケセラセラ",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 350,
     "composite": 2.4,
     "avgDensity": 12.7,
@@ -13784,7 +13784,7 @@
   },
   "1024-4": {
     "title": "bad guy",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 389,
     "composite": 11.76,
     "avgDensity": 15.4,
@@ -13795,7 +13795,7 @@
   },
   "1023-4": {
     "title": "DDU-DU DDU-DU",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 348,
     "composite": 4.02,
     "avgDensity": 16.13,
@@ -13806,7 +13806,7 @@
   },
   "142-4": {
     "title": "ファッションモンスター",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 374,
     "composite": 0,
     "avgDensity": 15.67,
@@ -13817,7 +13817,7 @@
   },
   "921-4": {
     "title": "8月の坂",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 291,
     "composite": 3.1,
     "avgDensity": 11.09,
@@ -13828,7 +13828,7 @@
   },
   "1287-4": {
     "title": "WOW",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 304,
     "composite": 6.92,
     "avgDensity": 13.77,
@@ -13839,7 +13839,7 @@
   },
   "1331-4": {
     "title": "Miss You 3000",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 211,
     "composite": 14.76,
     "avgDensity": 6.79,
@@ -13850,7 +13850,7 @@
   },
   "1336-4": {
     "title": "シカ色デイズ",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 422,
     "composite": 2.32,
     "avgDensity": 24.79,
@@ -13861,7 +13861,7 @@
   },
   "1312-4": {
     "title": "誰我為",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 360,
     "composite": 4.2,
     "avgDensity": 18.82,
@@ -13872,7 +13872,7 @@
   },
   "1410-4": {
     "title": "WINNER！ゴジュウジャー！",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 433,
     "composite": 0,
     "avgDensity": 26.73,
@@ -13883,7 +13883,7 @@
   },
   "460-4": {
     "title": "ようかい体操第一",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 272,
     "composite": 5.46,
     "avgDensity": 12.86,
@@ -13894,7 +13894,7 @@
   },
   "468-4": {
     "title": "祭り囃子でゲラゲラポー",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 292,
     "composite": 4.54,
     "avgDensity": 15.53,
@@ -13905,7 +13905,7 @@
   },
   "59-4": {
     "title": "僕らの世界にダンスを",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 266,
     "composite": 7.92,
     "avgDensity": 14.16,
@@ -13916,7 +13916,7 @@
   },
   "632-4": {
     "title": "太鼓のマーチ",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 553,
     "composite": 8.5,
     "avgDensity": 13.97,
@@ -13927,7 +13927,7 @@
   },
   "125-4": {
     "title": "ドラゴンスピリットメドレー",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 671,
     "composite": 1.82,
     "avgDensity": 19.61,
@@ -13938,7 +13938,7 @@
   },
   "1155-4": {
     "title": "アメリカンパトロール",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 415,
     "composite": 6.31,
     "avgDensity": 19.15,
@@ -13949,7 +13949,7 @@
   },
   "98-4": {
     "title": "おおブレネリ",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 351,
     "composite": 12.66,
     "avgDensity": 14.13,
@@ -13960,7 +13960,7 @@
   },
   "1226-4": {
     "title": "拝啓、学校にて・・・",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 443,
     "composite": 7.68,
     "avgDensity": 14.82,
@@ -13971,7 +13971,7 @@
   },
   "301-4": {
     "title": "My Mine",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 635,
     "composite": 0.3,
     "avgDensity": 24.59,
@@ -13982,7 +13982,7 @@
   },
   "287-4": {
     "title": "Growing Up",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 603,
     "composite": 1.24,
     "avgDensity": 24.95,
@@ -13993,7 +13993,7 @@
   },
   "209-4": {
     "title": "犬吠える",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 580,
     "composite": 0,
     "avgDensity": 27.2,
@@ -14004,7 +14004,7 @@
   },
   "631-4": {
     "title": "シャイニング65",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 495,
     "composite": 0,
     "avgDensity": 21.19,
@@ -14015,7 +14015,7 @@
   },
   "273-4": {
     "title": "季曲",
-    "constant": 7,
+    "constant": 7.0,
     "totalNotes": 536,
     "composite": 2,
     "avgDensity": 15.41,
@@ -14928,7 +14928,7 @@
   },
   "1300-4": {
     "title": "Show Time",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 277,
     "composite": 1.2,
     "avgDensity": 12.3,
@@ -14939,7 +14939,7 @@
   },
   "1301-4": {
     "title": "AMPTAKxCOLORS",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 270,
     "composite": 0,
     "avgDensity": 11.43,
@@ -14950,7 +14950,7 @@
   },
   "384-4": {
     "title": "RPG",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 345,
     "composite": 1.6,
     "avgDensity": 14.09,
@@ -14961,7 +14961,7 @@
   },
   "1283-4": {
     "title": "Say Something",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 292,
     "composite": 0.8,
     "avgDensity": 7.3,
@@ -14972,7 +14972,7 @@
   },
   "842-4": {
     "title": "紅蓮華",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 291,
     "composite": 0.9,
     "avgDensity": 12.89,
@@ -14983,7 +14983,7 @@
   },
   "1389-4": {
     "title": "キミとアイドルプリキュア♪ Light Up！",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 344,
     "composite": 0.6,
     "avgDensity": 16.35,
@@ -14994,7 +14994,7 @@
   },
   "1294-4": {
     "title": "わんだふるぷりきゅあ！evolution!!",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 307,
     "composite": 0,
     "avgDensity": 13.67,
@@ -15005,7 +15005,7 @@
   },
   "353-4": {
     "title": "ロックン・ハート！",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 384,
     "composite": 0,
     "avgDensity": 18.84,
@@ -15016,7 +15016,7 @@
   },
   "882-4": {
     "title": "乙女解剖",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 352,
     "composite": 0,
     "avgDensity": 11.95,
@@ -15027,7 +15027,7 @@
   },
   "671-4": {
     "title": "Tulip",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 410,
     "composite": 0,
     "avgDensity": 13.06,
@@ -15037,8 +15037,8 @@
     "hsChange": 0
   },
   "482-4": {
-    "title": "GOIN'!!!",
-    "constant": 6,
+    "title": "GOIN",
+    "constant": 6.0,
     "totalNotes": 346,
     "composite": 0,
     "avgDensity": 9.89,
@@ -15049,7 +15049,7 @@
   },
   "1201-4": {
     "title": "ドドドドドンだフル！",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 329,
     "composite": 0.3,
     "avgDensity": 9.79,
@@ -15060,7 +15060,7 @@
   },
   "886-4": {
     "title": "ハロー！どんちゃん",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 349,
     "composite": 0,
     "avgDensity": 10.55,
@@ -15071,7 +15071,7 @@
   },
   "415-4": {
     "title": "太鼓ラブ！",
-    "constant": 6,
+    "constant": 6.0,
     "totalNotes": 521,
     "composite": 0,
     "avgDensity": 14.07,
@@ -15258,7 +15258,7 @@
   },
   "1153-4": {
     "title": "ほめのび",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 294,
     "composite": 0,
     "avgDensity": 7.18,
@@ -15269,7 +15269,7 @@
   },
   "312-4": {
     "title": "よく遊びよく学べ",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 291,
     "composite": 0,
     "avgDensity": 13.24,
@@ -15280,7 +15280,7 @@
   },
   "1285-4": {
     "title": "麻雀 Sparrow",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 262,
     "composite": 3.62,
     "avgDensity": 8.89,
@@ -15291,7 +15291,7 @@
   },
   "1022-4": {
     "title": "ウィーアー！",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 339,
     "composite": 0,
     "avgDensity": 10.91,
@@ -15302,7 +15302,7 @@
   },
   "1118-4": {
     "title": "はねまり体操",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 302,
     "composite": 0,
     "avgDensity": 14.88,
@@ -15313,7 +15313,7 @@
   },
   "368-4": {
     "title": "さんぽ",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 371,
     "composite": 8.85,
     "avgDensity": 10.8,
@@ -15324,7 +15324,7 @@
   },
   "314-4": {
     "title": "おどるポンポコリン",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 288,
     "composite": 0,
     "avgDensity": 14.48,
@@ -15335,7 +15335,7 @@
   },
   "582-4": {
     "title": "キミとボクのミライ",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 292,
     "composite": 0.3,
     "avgDensity": 7.92,
@@ -15346,7 +15346,7 @@
   },
   "1270-4": {
     "title": "交響曲第五番「運命」",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 414,
     "composite": 0,
     "avgDensity": 10.47,
@@ -15357,7 +15357,7 @@
   },
   "1144-4": {
     "title": "六本の薔薇と采の歌",
-    "constant": 5,
+    "constant": 5.0,
     "totalNotes": 508,
     "composite": 0,
     "avgDensity": 12.32,
@@ -15445,7 +15445,7 @@
   },
   "974-4": {
     "title": "炎",
-    "constant": 4,
+    "constant": 4.0,
     "totalNotes": 216,
     "composite": 0,
     "avgDensity": 3.87,
@@ -15456,7 +15456,7 @@
   },
   "1302-4": {
     "title": "爆上戦隊ブンブンジャー",
-    "constant": 4,
+    "constant": 4.0,
     "totalNotes": 224,
     "composite": 0,
     "avgDensity": 10.54,
@@ -15467,7 +15467,7 @@
   },
   "430-4": {
     "title": "となりのトトロ",
-    "constant": 4,
+    "constant": 4.0,
     "totalNotes": 296,
     "composite": 0,
     "avgDensity": 10.52,
@@ -15478,7 +15478,7 @@
   },
   "1029-4": {
     "title": "カラフル・パーティ",
-    "constant": 4,
+    "constant": 4.0,
     "totalNotes": 225,
     "composite": 0.7,
     "avgDensity": 8.1,
@@ -15489,7 +15489,7 @@
   },
   "1055-4": {
     "title": "Baby Shark（ベイビー・シャーク）",
-    "constant": 4,
+    "constant": 4.0,
     "totalNotes": 318,
     "composite": 0,
     "avgDensity": 10.5,
@@ -15533,7 +15533,7 @@
   },
   "824-4": {
     "title": "ドラマツルギー",
-    "constant": 3,
+    "constant": 3.0,
     "totalNotes": 199,
     "composite": 0,
     "avgDensity": 7.35,
@@ -15544,7 +15544,7 @@
   },
   "1333-4": {
     "title": "淘汰",
-    "constant": 3,
+    "constant": 3.0,
     "totalNotes": 172,
     "composite": 3.3,
     "avgDensity": 1,
@@ -15555,7 +15555,7 @@
   },
   "333-4": {
     "title": "崖の上のポニョ",
-    "constant": 3,
+    "constant": 3.0,
     "totalNotes": 225,
     "composite": 0,
     "avgDensity": 6.73,
@@ -15566,7 +15566,7 @@
   },
   "1295-4": {
     "title": "うんぴフレンズ",
-    "constant": 2,
+    "constant": 2.0,
     "totalNotes": 189,
     "composite": 0,
     "avgDensity": 10.51,
@@ -15577,7 +15577,7 @@
   },
   "604-4": {
     "title": "いつも何度でも",
-    "constant": 2,
+    "constant": 2.0,
     "totalNotes": 229,
     "composite": 0,
     "avgDensity": 6.82,
@@ -15588,7 +15588,7 @@
   },
   "895-4": {
     "title": "HIMAWARI HAPPY",
-    "constant": 2,
+    "constant": 2.0,
     "totalNotes": 173,
     "composite": 0,
     "avgDensity": 7.87,
@@ -15599,7 +15599,7 @@
   },
   "831-4": {
     "title": "ゲゲゲの鬼太郎",
-    "constant": 2,
+    "constant": 2.0,
     "totalNotes": 155,
     "composite": 1.11,
     "avgDensity": 4.25,
@@ -15610,7 +15610,7 @@
   },
   "231-4": {
     "title": "限界突破×サバイバー",
-    "constant": 2,
+    "constant": 2.0,
     "totalNotes": 198,
     "composite": 0,
     "avgDensity": 6.39,
@@ -15621,7 +15621,7 @@
   },
   "811-4": {
     "title": "あなたとトゥラッタッタ♪",
-    "constant": 1,
+    "constant": 1.0,
     "totalNotes": 145,
     "composite": 0.15,
     "avgDensity": 1.29,
@@ -15632,7 +15632,7 @@
   },
   "235-4": {
     "title": "もりのくまさん",
-    "constant": 1,
+    "constant": 1.0,
     "totalNotes": 197,
     "composite": 0,
     "avgDensity": 3.16,
