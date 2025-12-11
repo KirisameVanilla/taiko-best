@@ -84,15 +84,8 @@ const CONSTANT_TO_X_MAP: Record<number, number> = {
   11.6: 15.50
 }
 
-const MAX_CONSTANT_VALUE = getMaxConstantValue();
-
-/**
- * 获取最大定数值
- * @returns 最大定数值
- */
-export function getMaxConstantValue(): number {
-  return Math.max(...Object.keys(CONSTANT_TO_X_MAP).map(key => parseFloat(key)))
-}
+// 归一化系数
+const NORMALIZATION_FACTOR = 15.5
 
 /**
  * 根据定数获取对应的x值（定数得点）
@@ -322,7 +315,7 @@ export function calcAccuracy(totalNotes: number, userScore: UserScore): (number)
  * - 乘以MAX_CONSTANT_VALUE / 100进行归一化，确保维度值在合理范围内
  */
 export function calcIndividualRating(rating: number, raw_value: number): number {
-  return SQRT(rating * raw_value * MAX_CONSTANT_VALUE / 100)
+  return SQRT(rating * raw_value * NORMALIZATION_FACTOR / 100)
 }
 
 
