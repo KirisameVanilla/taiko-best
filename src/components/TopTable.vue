@@ -94,6 +94,7 @@ const recommendedSongs = computed(() => {
     <!-- 推荐歌曲列表 -->
     <div v-else-if="showMode === 'recommend'" class="mt-8 text-left">
       <h3 class="mb-2.5 text-primary text-base">请注意: 当前功能正在开发中, 结果可能不准确</h3>
+  <p class="description">难度偏差是指歌曲难度指标与 B20 中位数的偏差百分比，越接近0表示难度越适中。难度偏越差小，评分顺位越低，意味着该歌曲你越有能力取得更高的评分。刷新该曲目的评分能够更客观的反映你的实际水平并以此为依据推荐更适合的曲目。难度偏差大如果为正数，说明该曲目在一定程度上超过了你的当前能力范围，单同时也有更高的进步空间，请根据你的实际情况和游戏倾向合理选择练习曲目。</p>
       <!-- 基准值信息 -->
       <div v-if="recommendedSongs.length > 0" class="flex gap-6 bg-[#f9f9f9] mb-3 px-3 py-2 border-primary border-l-[3px] rounded">
         <span class="text-gray-600 text-sm">
@@ -111,8 +112,9 @@ const recommendedSongs = computed(() => {
               <th>定数</th>
               <th>精度</th>
               <!-- <th>歌曲难度指标</th> -->
-              <th>难度偏差值</th>
-              <th>当前 Rating</th>
+              <th>难度偏差</th>
+              <th>当前评分</th>
+              <th>评分顺位</th>
               <!-- <th>Rating 偏差</th> -->
             </tr>
           </thead>
@@ -124,14 +126,9 @@ const recommendedSongs = computed(() => {
                 <template v-if="typeof (song as any).great === 'number' && typeof (song as any).good === 'number' && (song as any)._constant && (song as any)._constant > 0 && (song as any)._songIndicatorValue">
                   {{
                     (() => {
-                      // 取推荐算法中的 constant, great, good, 通过 calcAccuracy 计算精度百分比
                       try {
-                        // 需要 totalNotes，推荐结果没有，需从 _songIndicatorValue 反推，或直接用 great+good/估算
-                        // 这里假设推荐结果中 _songIndicatorValue 近似于定数得点，无法直接反推总音符数，
-                        // 只能用 great+good+bad 作为总数估算（未游玩时为0，显示-）
                         const total = (song as any).great + (song as any).good + (song as any).bad;
                         if (total === 0) return '-';
-                        // calcAccuracy: (great*1 + good*0) / totalNotes
                         const acc = ((song as any).great) / total;
                         return (acc * 100).toFixed(2) + '%';
                       } catch { return '-'; }
@@ -147,10 +144,22 @@ const recommendedSongs = computed(() => {
                 </template>
                 <template v-else>-</template>
               </td>
-              <td>{{ formatValue(song, valueKey) }}</td>
+              <td>
+                <template v-if="!(song as any)._isUnplayed">
+                  {{ formatValue(song, valueKey) }}
+                </template>
+                <template v-else>-</template>
+              </td>
               <!-- <td :class="{'text-[#4caf50] font-semibold': ((song as any)._userScoreValue - (song as any)._scoreBaseline) < 0, 'text-[#ff9800] font-semibold': ((song as any)._userScoreValue - (song as any)._scoreBaseline) >= 0}">
                 {{ ((song as any)._userScoreValue - (song as any)._scoreBaseline)?.toFixed(2) || '-' }}
               </td> -->
+              <td>
+                <!-- 仅已游玩歌曲展示排名，未游玩显示 '-' -->
+                <template v-if="(song as any)._dimensionRanks && (song as any)._dimensionRanks[valueKey] && !(song as any)._isUnplayed">
+                  {{ (song as any)._dimensionRanks[valueKey] }}
+                </template>
+                <template v-else>-</template>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -179,4 +188,20 @@ th {
 table tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+/* 推荐说明描述样式 */
+.description {
+  font-size: 14px;
+  color: #353535;
+  margin-bottom: 10px;
+  line-height: 1.8;
+  /* background: #f7f7fa; */
+  border-radius: 4px;
+  /* padding: 8px 12px; */
+  display: inline-block;
+}
+h3.text-primary {
+  font-weight: bold;
+}
+
 </style>

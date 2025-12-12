@@ -180,7 +180,44 @@ export function recommendSongs(
     ? calculateMedian(best20RatingValues) 
     : 0
 
-  // 7. 计算推荐分数
+  // 7. 计算所有维度的玩家表现排序（包含所有歌曲，不排除b20）
+  const dimensionKeys: (keyof SongStats)[] = ['rating', 'daigouryoku', 'stamina', 'speed', 'accuracy_power', 'rhythm', 'complex']
+  // 生成每个维度的排序Map: { 维度: Map<曲名, 排名> }
+  // 排名基于所有歌曲（allStats + 未游玩），不排除b20
+  const allStatsMap = new Map<string, SongStats>()
+  allStats.forEach(s => allStatsMap.set(s.title, s))
+  const allSongStats: SongStats[] = Object.values(cachedSongsDatabase).map(sd => {
+    const stat = allStatsMap.get(sd.title)
+    if (stat) return stat
+    // 构造未游玩 SongStats
+    const statWithId = allStats.find(s => s.title === sd.title)
+    return {
+      id: statWithId ? statWithId.id : -1,
+      title: sd.title,
+      rating: 0,
+      daigouryoku: 0,
+      stamina: 0,
+      speed: 0,
+      accuracy_power: 0,
+      rhythm: 0,
+      complex: 0,
+      great: 0,
+      good: 0,
+      bad: 0
+    }
+  })
+  const dimensionRankMaps: Record<string, Map<string, number>> = {}
+  for (const key of dimensionKeys) {
+    // 降序排序，分数高的排名靠前
+    const sorted = [...allSongStats].sort((a, b) => (b[key] as number) - (a[key] as number))
+    const map = new Map<string, number>()
+    sorted.forEach((s, idx) => {
+      map.set(s.title, idx + 1)
+    })
+    dimensionRankMaps[key] = map
+  }
+
+  // 7. 计算推荐分数，并写入每个维度的玩家表现排名
   const scored = candidates.map(song => {
     // 查找歌曲的原始数据
     const songData = Object.values(cachedSongsDatabase).find(sd => sd.title === song.title)
@@ -223,6 +260,13 @@ export function recommendSongs(
     const isInStrictRange = 
       songIndicatorValue <= best20IndicatorMedian * 1.05 // 上浮不超过 5%
       && songIndicatorValue >= best20IndicatorMedian * 0.9      // 下浮不超过 10%
+
+    // 组装所有维度的排名
+    const dimensionRanks: Record<string, number> = {}
+    for (const key of dimensionKeys) {
+      dimensionRanks[key] = dimensionRankMaps[key].get(song.title) ?? 0
+    }
+
     return { 
       ...song,
       _constant: songData.constant,
@@ -238,7 +282,8 @@ export function recommendSongs(
       _songIndicatorValue: songIndicatorValue,
       _best20IndicatorMedian: best20IndicatorMedian,
       _userScoreValue: userScoreValue,
-      _scoreBaseline: best20UserScoreMedian  // 评分基准值是 Best20 用户得分中位数
+      _scoreBaseline: best20UserScoreMedian,  // 评分基准值是 Best20 用户得分中位数
+      _dimensionRanks: dimensionRanks // 新增：所有维度的玩家表现排名
     }
   }).filter((song): song is NonNullable<typeof song> => song !== null)
 
