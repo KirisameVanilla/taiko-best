@@ -27,13 +27,95 @@ const handlePaste = async () => {
   }
 }
 
+/* 尝试解析旧版传分器格式
+  schema: [
+    [song_no, level, high_score, best_score_rank, good_cnt, ok_cnt, ng_cnt, pound_cnt, combo_cnt, stage_cnt, clear_cnt, full_combo_cnt, dondaful_combo_cnt, update_datetime],
+    ...
+  ]
+*/
+function tryParseTaikoScoreGetter(input: string): string | null {
+  try {
+    const arr = JSON.parse(input);
+    if (Array.isArray(arr) && (Array.isArray(arr[0]) || arr.length === 0)) {
+      return JSON.stringify(arr);
+    }
+  } catch (e) {}
+  return null;
+}
+
+/* 尝试解析新版 LLX Donder Tool 传分器格式
+  schema: [
+    {
+      song_no: string,
+      level: string,
+      high_score: number,
+      best_score_rank: string,
+      good_cnt: number,
+      ok_cnt: number,
+      ng_cnt: number,
+      pound_cnt: number,
+      combo_cnt: number,
+      stage_cnt: number,
+      clear_cnt: string,
+      full_combo_cnt: boolean,
+      dondaful_combo_cnt: boolean,
+      update_datetime?: string
+    },
+    ...
+  ]
+*/
+function tryParseDonderTool(input: string): string | null {
+  let parsed: any;
+  try {
+    parsed = JSON.parse(input);
+  } catch (e) {
+    return null;
+  }
+  const isNewFormat = (obj: any) => {
+    return obj && typeof obj === 'object' && (
+      (Array.isArray(obj) && obj.length > 0 && obj[0] && typeof obj[0] === 'object' && 'song_no' in obj[0]) ||
+      (!Array.isArray(obj) && 'song_no' in obj)
+    );
+  };
+  if (!isNewFormat(parsed)) return null;
+  let arr = Array.isArray(parsed) ? parsed : [parsed];
+  return JSON.stringify(arr.map((item: any) => [
+    item.song_no,
+    item.level,
+    item.high_score,
+    item.best_score_rank,
+    item.good_cnt,
+    item.ok_cnt,
+    item.ng_cnt,
+    item.pound_cnt,
+    item.combo_cnt,
+    item.stage_cnt,
+    item.clear_cnt,
+    item.full_combo_cnt,
+    item.dondaful_combo_cnt,
+    item.update_datetime || item.highscore_datetime || ''
+  ]));
+}
+
 const handleAnalyze = () => {
   if (!scoreInput.value.trim()) {
     showModal('请输入数据', '提示')
     return
   }
+
+  const input = scoreInput.value.trim();
+  let output = tryParseTaikoScoreGetter(input);
+  if (!output) {
+    output = tryParseDonderTool(input);
+  }
+  if (!output) {
+    // 既不是旧格式也不是新格式，忽略解析
+    showModal('数据格式不正确', '错误')
+    return
+  }
+
   // 将数据存储到 localStorage
-  localStorage.setItem('taikoScoreData', scoreInput.value)
+  localStorage.setItem('taikoScoreData', output)
   // 触发自定义事件以通知其他组件
   window.dispatchEvent(new Event('localStorageUpdate'))
   // 导航到报告页面
