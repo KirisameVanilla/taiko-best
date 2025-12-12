@@ -33,6 +33,38 @@ const handlePaste = async () => {
   }
 }
 
+const handleUpload = () => {
+  // 使用现代浏览器 API showOpenFilePicker
+  if ('showOpenFilePicker' in window) {
+    (async () => {
+      try {
+        const [fileHandle] = await (window as any).showOpenFilePicker({
+          types: [
+            {
+              description: '文本或数据文件',
+              accept: {
+                'text/plain': ['.json']
+              }
+            }
+          ],
+          multiple: false
+        })
+        if (!fileHandle) return
+        const file = await fileHandle.getFile()
+        const text = await file.text()
+        scoreInput.value = text
+        showModal('文件内容已粘贴到文本框！')
+      } catch (err: any) {
+        if (err?.name !== 'AbortError') {
+          showModal('读取文件失败', '错误')
+        }
+      }
+    })()
+  } else {
+    showModal('当前浏览器不支持文件选择 API，请使用新版 Chrome/Edge/Firefox', '错误')
+  }
+}
+
 /* 尝试解析旧版传分器格式
   schema: [
     [song_no, level, high_score, best_score_rank, good_cnt, ok_cnt, ng_cnt, pound_cnt, combo_cnt, stage_cnt, clear_cnt, full_combo_cnt, dondaful_combo_cnt, update_datetime],
@@ -131,17 +163,17 @@ const handleAnalyze = () => {
 
 <template>
   <div class="bg-white shadow-[0_4px_6px_rgba(0,0,0,0.1)] mx-auto p-[30px] rounded-[10px] max-w-[800px]">
-    <section>
-    <h6 class="my-2.5 text-[#888] text-center">算法更新时间: 2025/12/11</h6>
-    <h6 class="my-2.5 text-[#888] text-center">网页更新时间: 2025/12/11</h6>
-    <h6 class="my-2.5 text-[#888] text-center">曲目列表页面点击歌曲可以修改成绩，右下角菜单按钮可以加入我们的QQ群</h6>
-    <h6 class="my-2.5 text-[#888] text-center">本 Rating 系统旨在分析自身弱点并针对练习, 请勿用于攀比</h6>
+    <section class="announcement">
+      <!-- <div class="announcement-title">📢 网站公告</div> -->
+      <p class="my-1">算法更新时间: 2025/12/11 &nbsp;&nbsp;&nbsp;&nbsp; 网页更新时间: 2025/12/13</p>
+      <p class="my-1">曲目列表页面点击歌曲可以修改成绩，右下角菜单按钮可以加入我们的QQ群</p>
+      <p class="my-1">本 Rating 系统旨在分析自身弱点并针对练习, 请勿用于攀比</p>
     </section>
     <section>
       <h2 class="text-[#333] text-center font-bold">使用指南</h2>
-      <p class="my-2.5 leading-relaxed">访问 <a href="https://donder-tool.llx.life/score" class="text-primary hover:underline no-underline" target="_blank">Donder 查分器</a>，绑定自己的鼓众广场 ID，同步成绩后，点击“导出成绩”按钮，将导出的文件内容全部复制粘贴到下方文本框中即可。</p>
-      <p class="my-2.5 leading-relaxed">如果 Donder 查分器无法访问或导出格式异常，可以尝试使用传分器导出数据。</p>
-      <p><button @click="toggleOldGuide" class="border-none bg-[#2196f3] hover:bg-[#1976d2] px-4 py-1 rounded cursor-pointer focus:outline-none text-xs text-white">{{ showOldGuide ? '隐藏传分器指南' : '查看传分器指南' }}</button></p>
+      <p class="my-2.5 leading-relaxed">访问 <a href="https://donder-tool.llx.life/score" class="text-primary hover:underline no-underline" target="_blank">Donder 查分器</a>，绑定自己的鼓众广场 ID，同步成绩后，点击“导出成绩”按钮，将导出的文件<b>上传</b>，或将其内容手动复制<b>粘贴</b>到下方文本框中即可。</p>
+      <p class="my-2.5 leading-relaxed">如果 Donder 查分器无法访问或导出格式异常，可以尝试使用传分器导出数据。<button @click="toggleOldGuide" class="text-primary hover:underline no-underline">{{ showOldGuide ? '隐藏传分器指南' : '查看传分器指南' }}</button></p>
+      
     </section>
     <transition name="fade">
       <section v-show="showOldGuide">
@@ -163,20 +195,69 @@ const handleAnalyze = () => {
         </div>
       </section>
     </transition>
-    <div class="relative my-5">
+    <div class="my-5">
+      <div class="toolbar">
+        <button @click="handleUpload" class="toolbar-btn">📁 上传文件</button>
+        <button @click="handlePaste" class="toolbar-btn">📋 粘贴数据</button>
+      </div>
       <textarea 
         v-model="scoreInput" 
         rows="4" 
         placeholder="请输入数据"
-        class="box-border p-2.5 pr-[70px] border border-[#ddd] rounded w-full font-mono resize-none"
+        class="box-border p-2.5 border border-[#ddd] rounded w-full font-mono resize-none"
       ></textarea>
-      <button @click="handlePaste" class="top-2.5 right-2.5 absolute bg-[#2196f3] hover:bg-[#1976d2] px-3 py-1.5 border-none rounded text-white text-sm transition-colors cursor-pointer">粘贴</button>
     </div>
     <button @click="handleAnalyze" class="bg-primary hover:bg-primary-dark p-3 border-none rounded w-full text-white text-base transition-colors cursor-pointer">分析数据</button>
   </div>
 </template>
 
 <style scoped>
+.announcement {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #2196f3;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.announcement-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2196f3;
+}
+
+.announcement p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.toolbar-btn {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.toolbar-btn:hover {
+  background: #1976d2;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s;
 }
