@@ -33,7 +33,7 @@ const handleOverlayClick = (e: MouseEvent) => {
           <button class="flex justify-center items-center bg-none p-0 border-none w-[30px] h-[30px] text-[28px] text-gray-500 hover:text-gray-900 leading-none cursor-pointer" @click="handleClose">&times;</button>
         </div>
         <div class="p-5">
-          <p class="m-0 text-gray-700 leading-normal">{{ message }}</p>
+          <p class="m-0 text-gray-700 leading-normal whitespace-pre-wrap">{{ message }}</p>
         </div>
         <div class="flex justify-end px-5 py-3 border-gray-200 border-t">
           <button class="bg-blue-500 hover:bg-blue-600 px-4 py-2 border-none rounded-md font-medium text-white text-sm cursor-pointer" @click="handleClose">确定</button>

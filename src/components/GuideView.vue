@@ -7,11 +7,111 @@ const router = useRouter()
 const scoreInput = ref('')
 const { showModal } = useModal()
 
+// 控制向导和使用指南的显示
+const showWizard = ref(true)
+const showGuideContent = ref(false)
+
+// 向导相关状态
+const donderId = ref('')
+const inputDonderId = ref('')
+const wizardStep = ref(1)
+const isLoading = ref(false)
+
 // 折叠旧指南
 const showOldGuide = ref(false)
 const toggleOldGuide = () => {
   showOldGuide.value = !showOldGuide.value
 }
+
+// 初始化：检查是否已绑定广场ID
+const initDonderId = () => {
+  const savedId = localStorage.getItem('donderId')
+  if (savedId) {
+    donderId.value = savedId
+    wizardStep.value = 2
+  }
+}
+
+// 绑定广场ID
+const bindDonderId = () => {
+  const id = inputDonderId.value.trim()
+  if (!id) {
+    showModal('请输入广场 ID', '错误')
+    return
+  }
+  if (!/^\d+$/.test(id)) {
+    showModal('广场 ID 必须是数字', '错误')
+    return
+  }
+  localStorage.setItem('donderId', id)
+  donderId.value = id
+  wizardStep.value = 2
+}
+
+// 重新绑定
+const rebindDonderId = () => {
+  donderId.value = ''
+  inputDonderId.value = ''
+  wizardStep.value = 1
+}
+
+// 从Donder查分器获取数据并分析
+const fetchAndAnalyze = async () => {
+  if (!donderId.value) {
+    showModal('广场 ID 不存在', '错误')
+    return
+  }
+  
+  isLoading.value = true
+  
+  try {
+    const response = await fetch(`https://hasura.llx.life/api/rest/donder/get-score?id=${donderId.value}`)
+    
+    if (!response.ok) {
+      throw new Error('同步数据失败')
+    }
+    
+    const data = await response.json()
+    const scoreData = data?.score?.data
+    
+    if (!scoreData || scoreData.length === 0) {
+      showModal(`未找到数据，请确认：
+1.您绑定的广场 ID 是否正确？
+2.查分器分数是否已经同步到最新？
+3.是否有魔王难度的分数记录？`, '分析失败')
+      isLoading.value = false
+      return
+    }
+    
+    const output = tryParseDonderTool(scoreData)
+    
+    if (!output) {
+      showModal('数据格式不正确', '分析失败')
+      isLoading.value = false
+      return
+    }
+    
+    anyalyze(output)
+  } catch (error: any) {
+    showModal(error.message || '同步数据失败', '分析失败')
+    isLoading.value = false
+  }
+}
+
+// 点击手动导入成绩按钮
+const handleManualImport = () => {
+  showWizard.value = false
+  showGuideContent.value = true
+}
+
+// 返回向导
+const backToWizard = () => {
+  showGuideContent.value = false
+  showWizard.value = true
+}
+
+// 组件挂载时初始化
+initDonderId()
 
 const copyPowerShellCode = () => {
   const text = `$content = (iwr "https://www.baidu.com/api/ahfsdafbaqwerhue").Content; $content | Set-Clipboard; Write-Host "内容已复制到剪贴板！长度为: $($content.Length)" -ForegroundColor Green`
@@ -152,8 +252,12 @@ const handleAnalyze = () => {
     return
   }
 
+  anyalyze(output)
+}
+
+const anyalyze = (input: string) => {
   // 将数据存储到 localStorage
-  localStorage.setItem('taikoScoreData', output)
+  localStorage.setItem('taikoScoreData', input)
   // 触发自定义事件以通知其他组件
   window.dispatchEvent(new Event('localStorageUpdate'))
   // 导航到报告页面
@@ -163,22 +267,84 @@ const handleAnalyze = () => {
 
 <template>
   <div class="bg-white shadow-[0_4px_6px_rgba(0,0,0,0.1)] mx-auto p-[30px] rounded-[10px] max-w-[800px]">
-    <section class="announcement">
-      <!-- <div class="announcement-title">📢 网站公告</div> -->
-      <p class="my-1">算法更新时间: 2025/12/11 &nbsp;&nbsp;&nbsp;&nbsp; 网页更新时间: 2025/12/13</p>
+    <section class="bg-[#f8f9fa] mb-6 p-5 border border-[#e0e0e0] border-l-[#2196f3] border-l-4 rounded-md text-[#333]">
+      <p class="my-1">算法更新时间: 2025/12/11</p>
+      <p class="my-1">网页更新时间: 2025/12/13</p>
       <p class="my-1">曲目列表页面点击歌曲可以修改成绩，右下角菜单按钮可以加入我们的QQ群</p>
       <p class="my-1">本 Rating 系统旨在分析自身弱点并针对练习, 请勿用于攀比</p>
     </section>
     <section>
-      <h2 class="text-[#333] text-center font-bold">使用指南</h2>
-      <p class="my-2.5 leading-relaxed">访问 <a href="https://donder-tool.llx.life/score" class="text-primary hover:underline no-underline" target="_blank">Donder 查分器</a>，绑定自己的鼓众广场 ID，同步成绩后，点击“导出成绩”按钮，将导出的文件<b>上传</b>，或将其内容手动复制<b>粘贴</b>到下方文本框中即可。</p>
-      <p class="my-2.5 leading-relaxed">如果 Donder 查分器无法访问或导出格式异常，可以尝试使用传分器导出数据。<button @click="toggleOldGuide" class="text-primary hover:underline no-underline">{{ showOldGuide ? '隐藏传分器指南' : '查看传分器指南' }}</button></p>
+      <!-- 新的向导 -->
+      <transition name="fade">
+        <div v-show="showWizard" class="bg-gradient-to-br from-[#546e7a] to-[#37474f] shadow-[0_10px_25px_rgba(84,110,122,0.3)] my-8 p-10 rounded-xl text-center">
+          <div class="flex flex-col items-center gap-5">
+            <!-- 步骤1：绑定广场ID -->
+            <div v-if="wizardStep === 1" class="flex flex-col items-center gap-4 w-full">
+              <p class="m-0 font-medium text-white text-lg">欢迎使用太鼓达人 Rating 分析系统！</p>
+              <p class="m-0 text-white/90 text-sm">请先绑定您的鼓众广场 ID</p>
+              <div class="flex items-center gap-0 focus-within:shadow-[0_0_0_3px_rgba(255,255,255,0.3)] rounded-lg w-full max-w-[500px] transition-all duration-300">
+                <input 
+                  v-model="inputDonderId" 
+                  type="text" 
+                  placeholder="请输入广场 ID"
+                  class="box-border flex-1 bg-white/95 focus:bg-white px-4 py-3 border-2 border-white/30 focus:border-white/30 border-r-0 rounded-l-lg focus:outline-none h-12 text-[#333] placeholder:text-[#999] text-base transition-all duration-300"
+                  @keyup.enter="bindDonderId"
+                />
+                <button @click="bindDonderId" class="box-border flex items-center bg-[#607d8b] hover:bg-[#546e7a] active:bg-[#455a64] disabled:opacity-70 shadow-[0_4px_15px_rgba(96,125,139,0.3)] hover:shadow-[0_6px_20px_rgba(96,125,139,0.4)] px-6 border-none rounded-r-lg h-12 font-semibold text-white text-base whitespace-nowrap transition-all duration-300 cursor-pointer disabled:cursor-not-allowed">绑定广场 ID →</button>
+              </div>
+            </div>
+
+            <!-- 步骤2：同步并分析数据 -->
+            <div v-else-if="wizardStep === 2" class="flex flex-col items-center gap-4 w-full">
+              <div class="flex flex-wrap justify-center items-center gap-3 bg-white/15 px-5 py-3 rounded-lg">
+                <span class="text-white/90 text-sm">您的广场 ID：</span>
+                <span class="font-semibold text-white text-lg">{{ donderId }}</span>
+                <button @click="rebindDonderId" class="bg-white/20 hover:bg-white/30 px-4 py-1.5 border border-white/50 rounded-md font-medium text-white text-sm transition-all duration-300 cursor-pointer">重新绑定</button>
+              </div>
+              <p class="m-0 max-w-[500px] text-white/95 text-sm text-center leading-relaxed">
+                请先前往 <a href="https://donder-tool.llx.life/score" class="font-semibold text-white underline hover:no-underline" target="_blank">Donder 查分器</a>，绑定自己的鼓众广场 ID，并同步你的成绩。
+                <br />
+                请确保你在查分器中的成绩数据是最新的，否则分析结果可能不准确。
+                <br />完成上述操作后，请点击下方 “分析数据” 按钮自动同步分析数据。
+              </p>
+              <div>
+              &nbsp;&nbsp;
+              <button 
+                @click="fetchAndAnalyze" 
+                :disabled="isLoading"
+                class="bg-white disabled:opacity-70 shadow-[0_4px_15px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] px-8 py-3 border-none rounded-lg min-w-[160px] font-semibold text-[#546e7a] text-base transition-all hover:translate-y-[-2px] active:translate-y-0 duration-300 cursor-pointer disabled:cursor-not-allowed"
+              >
+                {{ isLoading ? '正在分析...' : '分析数据' }}
+              </button>
+              </div>
+              <p class="m-0 max-w-[500px] text-white/95 text-sm text-center leading-relaxed">如果自动同步分析数据遇到问题，您可以尝试<button @click="handleManualImport" class="bg-transparent px-4 py-2 border-none text-white/90 hover:text-white text-sm underline transition-all duration-300 cursor-pointer">可以手动导入成绩</button></p>
+            </div>
+          </div>
+        </div>
+      </transition>
+      
+      <!-- 原有的使用指南内容 -->
+      <transition name="fade">
+        <div v-show="showGuideContent">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="m-0 font-bold text-[#333]">使用指南</h2>
+            <button 
+              @click="backToWizard" 
+              class="bg-[#607d8b] hover:bg-[#546e7a] px-4 py-2 border-none rounded-lg font-medium text-white text-sm transition-all duration-300 cursor-pointer"
+            >
+              ← 返回
+            </button>
+          </div>
+          <p class="my-2.5 leading-relaxed">访问 <a href="https://donder-tool.llx.life/score" class="text-primary hover:underline no-underline" target="_blank">Donder 查分器</a>，绑定自己的鼓众广场 ID，同步成绩后，点击"导出成绩"按钮，将导出的文件<b>上传</b>，或将其内容手动复制<b>粘贴</b>到下方文本框中即可。</p>
+          <p class="my-2.5 leading-relaxed">如果 Donder 查分器无法访问或导出格式异常，可以尝试使用传分器导出数据。<button @click="toggleOldGuide" class="text-primary hover:underline no-underline">{{ showOldGuide ? '隐藏传分器指南' : '查看传分器指南' }}</button></p>
+        </div>
+      </transition>
       
     </section>
     <transition name="fade">
       <section v-show="showOldGuide">
-        <div class="flex items-center justify-center">
-          <h2 class="text-[#333] text-center font-bold mr-2">传分器指南</h2>
+        <div class="flex justify-center items-center">
+          <h2 class="mr-2 font-bold text-[#333] text-center">传分器指南</h2>
         </div>
         <p class="my-2.5 leading-relaxed">1. 须使用 Windows 系统</p>
         <p class="my-2.5 leading-relaxed">2. 启动传分器, 按照指引打开电脑端广场爬分, 直到传分器走到在 DonNote 点击上传按钮之前的一步(不需要打开 DonNote, 更不需要点击上传按钮)</p>
@@ -195,71 +361,32 @@ const handleAnalyze = () => {
         </div>
       </section>
     </transition>
-    <div class="my-5">
-      <div class="toolbar">
-        <button @click="handleUpload" class="toolbar-btn">📁 上传文件</button>
-        <button @click="handlePaste" class="toolbar-btn">📋 粘贴数据</button>
+    <transition name="fade">
+      <div v-show="showGuideContent" class="my-5">
+        <div class="flex flex-wrap gap-2 mb-2">
+          <button @click="handleUpload" class="bg-[#2196f3] hover:bg-[#1976d2] px-2 py-1 border-none rounded text-white text-sm whitespace-nowrap transition-colors cursor-pointer">📁 上传文件</button>
+          <button @click="handlePaste" class="bg-[#2196f3] hover:bg-[#1976d2] px-2 py-1 border-none rounded text-white text-sm whitespace-nowrap transition-colors cursor-pointer">📋 粘贴数据</button>
+        </div>
+        <textarea 
+          v-model="scoreInput" 
+          rows="4" 
+          placeholder="请输入数据"
+          class="box-border p-2.5 border border-[#ddd] rounded w-full font-mono resize-none"
+        ></textarea>
       </div>
-      <textarea 
-        v-model="scoreInput" 
-        rows="4" 
-        placeholder="请输入数据"
-        class="box-border p-2.5 border border-[#ddd] rounded w-full font-mono resize-none"
-      ></textarea>
-    </div>
-    <button @click="handleAnalyze" class="bg-primary hover:bg-primary-dark p-3 border-none rounded w-full text-white text-base transition-colors cursor-pointer">分析数据</button>
+    </transition>
+    <transition name="fade">
+      <button v-show="showGuideContent" @click="handleAnalyze" class="bg-primary hover:bg-primary-dark p-3 border-none rounded w-full text-white text-base transition-colors cursor-pointer">分析数据</button>
+    </transition>
   </div>
 </template>
 
 <style scoped>
-.announcement {
-  background: #f8f9fa;
-  border: 1px solid #e0e0e0;
-  border-left: 4px solid #2196f3;
-  border-radius: 6px;
-  padding: 20px;
-  margin-bottom: 25px;
-  color: #333;
-}
-
-.announcement-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #2196f3;
-}
-
-.announcement p {
-  color: #666;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.toolbar {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-
-.toolbar-btn {
-  background: #2196f3;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  white-space: nowrap;
-}
-
-.toolbar-btn:hover {
-  background: #1976d2;
-}
-
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active {
   transition: opacity 0.3s;
+}
+.fade-leave-active {
+  transition: opacity 0s;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
