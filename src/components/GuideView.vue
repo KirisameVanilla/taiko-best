@@ -104,6 +104,12 @@ const handleManualImport = () => {
   showGuideContent.value = true
 }
 
+// 返回向导
+const backToWizard = () => {
+  showGuideContent.value = false
+  showWizard.value = true
+}
+
 // 组件挂载时初始化
 initDonderId()
 
@@ -320,7 +326,15 @@ const anyalyze = (input: string) => {
       <!-- 原有的使用指南内容 -->
       <transition name="fade">
         <div v-show="showGuideContent">
-          <h2 class="font-bold text-[#333] text-center">使用指南</h2>
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="m-0 font-bold text-[#333]">使用指南</h2>
+            <button 
+              @click="backToWizard" 
+              class="bg-[#607d8b] hover:bg-[#546e7a] px-4 py-2 border-none rounded-lg font-medium text-white text-sm transition-all duration-300 cursor-pointer"
+            >
+              ← 返回
+            </button>
+          </div>
           <p class="my-2.5 leading-relaxed">访问 <a href="https://donder-tool.llx.life/score" class="text-primary hover:underline no-underline" target="_blank">Donder 查分器</a>，绑定自己的鼓众广场 ID，同步成绩后，点击"导出成绩"按钮，将导出的文件<b>上传</b>，或将其内容手动复制<b>粘贴</b>到下方文本框中即可。</p>
           <p class="my-2.5 leading-relaxed">如果 Donder 查分器无法访问或导出格式异常，可以尝试使用传分器导出数据。<button @click="toggleOldGuide" class="text-primary hover:underline no-underline">{{ showOldGuide ? '隐藏传分器指南' : '查看传分器指南' }}</button></p>
         </div>
@@ -368,8 +382,11 @@ const anyalyze = (input: string) => {
 </template>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active {
   transition: opacity 0.3s;
+}
+.fade-leave-active {
+  transition: opacity 0s;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
