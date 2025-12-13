@@ -283,15 +283,15 @@ const anyalyze = (input: string) => {
             <div v-if="wizardStep === 1" class="flex flex-col items-center gap-4 w-full">
               <p class="m-0 font-medium text-white text-lg">欢迎使用太鼓达人 Rating 分析系统！</p>
               <p class="m-0 text-white/90 text-sm">请先绑定您的鼓众广场 ID</p>
-              <div class="flex items-center gap-0 focus-within:shadow-[0_0_0_3px_rgba(255,255,255,0.3)] rounded-lg w-full max-w-[500px] transition-all duration-300">
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0 sm:focus-within:shadow-[0_0_0_3px_rgba(255,255,255,0.3)] sm:rounded-lg w-full max-w-[500px] transition-all duration-300">
                 <input 
                   v-model="inputDonderId" 
                   type="text" 
                   placeholder="请输入广场 ID"
-                  class="box-border flex-1 bg-white/95 focus:bg-white px-4 py-3 border-2 border-white/30 focus:border-white/30 border-r-0 rounded-l-lg focus:outline-none h-12 text-[#333] placeholder:text-[#999] text-base transition-all duration-300"
+                  class="box-border flex-1 bg-white/95 focus:bg-white px-4 py-3 border-2 border-white/30 focus:border-white/30 sm:border-r-0 rounded-lg sm:rounded-l-lg sm:rounded-r-none focus:outline-none h-12 text-[#333] placeholder:text-[#999] text-base transition-all duration-300"
                   @keyup.enter="bindDonderId"
                 />
-                <button @click="bindDonderId" class="box-border flex items-center bg-[#607d8b] hover:bg-[#546e7a] active:bg-[#455a64] disabled:opacity-70 shadow-[0_4px_15px_rgba(96,125,139,0.3)] hover:shadow-[0_6px_20px_rgba(96,125,139,0.4)] px-6 border-none rounded-r-lg h-12 font-semibold text-white text-base whitespace-nowrap transition-all duration-300 cursor-pointer disabled:cursor-not-allowed">绑定广场 ID →</button>
+                <button @click="bindDonderId" class="box-border flex items-center justify-center bg-[#607d8b] hover:bg-[#546e7a] active:bg-[#455a64] disabled:opacity-70 shadow-[0_4px_15px_rgba(96,125,139,0.3)] hover:shadow-[0_6px_20px_rgba(96,125,139,0.4)] px-6 border-none rounded-lg sm:rounded-r-lg sm:rounded-l-none h-12 font-semibold text-white text-base whitespace-nowrap transition-all duration-300 cursor-pointer disabled:cursor-not-allowed">绑定广场 ID →</button>
               </div>
             </div>
 
