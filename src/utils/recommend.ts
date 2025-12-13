@@ -187,6 +187,7 @@ export function recommendSongs(
       // 构造未游玩 SongStats
       return {
         id: entry.id,
+        level: entry.level,
         title: entry.title,
         rating: 0,
         daigouryoku: 0,
@@ -227,6 +228,7 @@ export function recommendSongs(
     if (stat) return stat
     return {
       id: entry.id,
+      level: entry.level,
       title: entry.title,
       rating: 0,
       daigouryoku: 0,

@@ -1,4 +1,4 @@
-import type { UserScore, SongData, SongLevelData, SongStats } from '../types'
+import type { UserScore, SongLevelData, SongStats } from '../types'
 
 // 常量定义：P1用于calcP函数的范数计算，AH1暂未使用
 const CONSTANTS = { P1: 150, AH1: 3 }
