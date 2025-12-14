@@ -344,7 +344,7 @@ export function calcMaxRatings(levelData: SongLevelData): { maxRating: number; m
   const x = getXFromConstant(levelData.constant)
   const y = calcY(1)  // 理论最高准确率对应的Y值
   const maxRating = calcSingleRating(x, y)
-  const maxDaigouryoku = calcDaigouryokuIndicator(levelData.constant)
+  const maxDaigouryoku = SQRT(maxRating * x)
   const maxAccuracyPower = SQRT(maxRating * y)  // 精度力 = √(maxRating × y)
   const maxStamina = calcIndividualRating(maxRating, calcStaminaIndicator(levelData.avgDensity, levelData.instDensity))
   const maxSpeed = calcIndividualRating(maxRating, calcSpeedIndicator(levelData.instDensity, levelData.avgDensity))
