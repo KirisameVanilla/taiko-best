@@ -1,7 +1,10 @@
-name: Update Songs Data
+name: Update Songs CN
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - update-songs-branch
 
 jobs:
   update-songs-cn:
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: update-songs-branch
         
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -33,21 +38,29 @@ jobs:
       - name: Check for changes
         id: git-check
         run: |
-          git diff --exit-code public/songs.json || echo "changed=true" >> $GITHUB_OUTPUT
+          git fetch origin main
+          git diff --exit-code origin/main -- public/songs.json || echo "changed=true" >> $GITHUB_OUTPUT
+          
+      - name: Commit and push to update-songs-branch
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/songs.json
+          git commit -m "chore: update songs data"
+          git push
+      
+      - name: Delete update-songs-branch if no changes
+        if: steps.git-check.outputs.changed != 'true'
+        run: |
+          git push origin --delete update-songs-branch || echo "Branch already deleted or doesn't exist"
           
       - name: Create Pull Request
         if: steps.git-check.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'chore: update songs data'
-          branch: update-songs-data
-          delete-branch: true
-          title: 'chore: update songs data'
-          body: |
-            ## 自动更新歌曲数据
-            
-            此 PR 由 GitHub Actions 自动创建，包含最新的歌曲数据更新。
-            
-            请检查更新内容后合并。
-          labels: automated
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --base main --head update-songs-branch --title "chore: update songs data" --body "## 自动更新歌曲数据
+          此 PR 由 GitHub Actions 自动创建，包含最新的歌曲数据更新。
+
+          请检查更新内容后合并。" --label automated || echo "PR already exists"
