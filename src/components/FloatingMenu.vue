@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { eventBus } from '@utils/eventBus'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { eventBus } from '../utils/eventBus'
 
 const route = useRoute()
 const isOpen = ref(false)
@@ -10,7 +10,6 @@ const onlyCnSongs = ref(false)
 const isReportPage = computed(() => route.name === 'report')
 
 onMounted(() => {
-  // 从 localStorage 读取设置
   const savedSetting = localStorage.getItem('onlyCnSongs')
   if (savedSetting !== null) {
     onlyCnSongs.value = savedSetting === 'true'

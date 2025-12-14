@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SongStats } from '../types'
+import type { SongStats } from '@/types';
 
 interface Props {
   song: SongStats

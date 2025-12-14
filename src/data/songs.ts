@@ -1,5 +1,5 @@
-import type { SongsDatabase } from '../types'
-import { useModal } from '../composables/useModal'
+import type { SongsDatabase } from '@/types'
+import { useModal } from '@composables/useModal'
 
 export const songsData: SongsDatabase = []
 

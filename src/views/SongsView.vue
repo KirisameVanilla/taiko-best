@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, computed, watch, onUnmounted } from 'vue'
-import { loadSongsData } from '../data/songs'
-import { parsePastedScores, calculateSongStats, MAX_CONSTANT_VALUE } from '../utils/calculator'
-import type { UserScore, SongStats, SongsDatabase } from '../types'
-import { findSongByIdLevel, expandSongsDatabase } from '../utils/songHelpers'
-import { eventBus } from '../utils/eventBus'
-import { difficultyMap, difficultyBadgeMap } from '../utils/difficulty'
-import EditScoreModal from './EditScoreModal.vue'
+import type { SongsDatabase, SongStats, UserScore } from '@/types'
+import EditScoreModal from '@components/EditScoreModal.vue'
+import { loadSongsData } from '@data/songs'
+import { calculateSongStats, MAX_CONSTANT_VALUE, parsePastedScores } from '@utils/calculator'
+import { difficultyBadgeMap, difficultyMap } from '@utils/difficulty'
+import { eventBus } from '@utils/eventBus'
+import { expandSongsDatabase, findSongByIdLevel } from '@utils/songHelpers'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
 interface SongRow {
   id: string
@@ -427,10 +427,8 @@ const filteredSongs = computed(() => {
         break
       case 'updatedAt':
         // 使用时间戳进行排序，没有记录的排在最后
-        const timeA = a.userScore?.updatedAt ? new Date(a.userScore.updatedAt).getTime() : 0
-        const timeB = b.userScore?.updatedAt ? new Date(b.userScore.updatedAt).getTime() : 0
-        valA = timeA
-        valB = timeB
+        valA = a.userScore?.updatedAt ? new Date(a.userScore.updatedAt).getTime() : 0
+        valB = b.userScore?.updatedAt ? new Date(b.userScore.updatedAt).getTime() : 0
         break
     }
     

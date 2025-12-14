@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
-import type { UserScore, SongLevelData, SongStats } from '../types'
-import { calculateSongStats } from '../utils/calculator'
+import type { SongLevelData, SongStats, UserScore } from '@/types'
+import { calculateSongStats } from '@utils/calculator'
+import { computed, ref, watch } from 'vue'
 
 interface Props {
   show: boolean

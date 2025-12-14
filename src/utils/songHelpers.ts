@@ -2,7 +2,7 @@
  * 辅助函数：从新格式的 SongData 中获取特定难度的数据
  */
 
-import type { SongData, SongLevelData } from '../types'
+import type { SongData, SongLevelData } from '@/types'
 
 /**
  * 从SongData中获取指定难度的数据

@@ -1,7 +1,7 @@
+import GuideView from '@views/GuideView.vue'
+import ReportView from '@views/ReportView.vue'
+import SongsView from '@views/SongsView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import GuideView from '../components/GuideView.vue'
-import ReportView from '../components/ReportView.vue'
-import SongsView from '../components/SongsView.vue'
 
 const router = createRouter({
   history: createWebHistory(),

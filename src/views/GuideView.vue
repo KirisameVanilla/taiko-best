@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { useModal } from '@composables/useModal'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useModal } from '../composables/useModal'
 
 const router = useRouter()
 const scoreInput = ref('')

@@ -1,4 +1,4 @@
-﻿import type { SongStats, SongLevelData, SongsDatabase } from '../types'
+﻿import type { SongStats, SongLevelData, SongsDatabase } from '@/types'
 import { findSongByTitle } from './songHelpers'
 import {
   calcRatingIndicator,
@@ -11,7 +11,7 @@ import {
   calcAccuracyPowerIndicator,
   filterDuplicateSongs
 } from './calculator'
-import duplicateSongs from '../data/duplicateSongs'
+import duplicateSongs from '@data/duplicateSongs'
 
 // 模块级变量，存储歌曲数据库
 let cachedSongsDatabase: SongsDatabase = []

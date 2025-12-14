@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, nextTick, onUnmounted } from 'vue'
-import type { SongStats, SongsDatabase } from '../types'
-import { recommendSongs, setSongsDatabase } from '../utils/recommend'
-import { parsePastedScores, calculateSongStats, MAX_CONSTANT_VALUE } from '../utils/calculator'
-import { loadSongsData } from '../data/songs'
-import { expandSongsDatabase } from '../utils/songHelpers'
-import { eventBus } from '../utils/eventBus'
-import { difficultyMap } from '../utils/difficulty'
-import RatingProgressCell from './RatingProgressCell.vue'
-import GuideModal from './GuideModal.vue'
+import type { SongsDatabase, SongStats } from '@/types'
+import GuideModal from '@components/GuideModal.vue'
+import RatingProgressCell from '@components/RatingProgressCell.vue'
+import { loadSongsData } from '@data/songs'
+import { calculateSongStats, MAX_CONSTANT_VALUE, parsePastedScores } from '@utils/calculator'
+import { difficultyMap } from '@utils/difficulty'
+import { eventBus } from '@utils/eventBus'
+import { recommendSongs, setSongsDatabase } from '@utils/recommend'
+import { expandSongsDatabase } from '@utils/songHelpers'
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 interface Props {
   title: string
