@@ -4,6 +4,18 @@ import requests
 from pathlib import Path
 
 
+song_type_list = [
+    "流行音乐",
+    "儿童音乐",
+    "动漫音乐",
+    "博歌乐音乐",
+    "游戏音乐",
+    "综合音乐",
+    "古典音乐",
+    "南梦宫原创音乐",
+]
+
+
 def process_songs_json(songs_cn_data, repo_root):
     """
     处理 songs.json 文件，添加 title_cn 和 is_cn 字段
@@ -57,7 +69,6 @@ def fetch_and_save_songs():
     """
     从API获取歌曲数据并保存到public/songs_cn.json
     """
-    # 从环境变量读取敏感信息
     api_url = os.getenv("TAIKO_API_URL")
     api_token = os.getenv("TAIKO_API_TOKEN")
 
@@ -66,20 +77,26 @@ def fetch_and_save_songs():
     if not api_token:
         raise ValueError("环境变量 TAIKO_API_TOKEN 未设置")
 
-    try:
-        # 发送GET请求
-        response = requests.post(
-            api_url,
-            headers={
-                "Authorization": api_token,
-                "Content-Type": "application/json",
-            },
-            json={"page": 1, "pageSize": 2000},
-        )
-        response.raise_for_status()  # 如果状态码不是 2xx 则抛出异常
+    songs_data = []
 
-        result = response.json()
-        songs_data = result["data"]["list"]
+    try:
+        for i in range(len(song_type_list)):
+            print(f"正在获取类型 '{song_type_list[i]}' 的歌曲数据...")
+            current_url = api_url + song_type_list[i]
+            response = requests.get(
+                current_url,
+                headers={
+                    "Authorization": api_token,
+                    "Content-Type": "application/json",
+                },
+                params={"page": 1, "pageSize": 600, "sort": 0},
+            )
+            response.raise_for_status()
+
+            result = response.json()
+            current_datas = result["data"]["data"]
+            for data in current_datas:
+                songs_data.append(data["song_info"])
 
         # 确定保存路径
         script_dir = Path(__file__).parent
