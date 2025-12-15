@@ -55,7 +55,7 @@ const navigateToSongs = () => {
           }"
           class="relative flex items-center gap-2 hover:bg-nav-active disabled:bg-[#475a6d] disabled:opacity-50 hover:shadow-[0_4px_12px_rgba(52,152,219,0.3)] px-6 py-3 border-2 hover:border-nav-active disabled:border-[#475a6d] rounded-md overflow-hidden font-semibold text-nav-text disabled:text-[#7f8c8d] text-base transition-all hover:-translate-y-0.5 active:translate-y-0 duration-300 cursor-pointer disabled:cursor-not-allowed"
         >
-          <span class="z-[1] relative">导入界面</span>
+          <i class="z-[1] relative fas fa-home"></i>
         </button>
         <button 
           @click="navigateToSongs"
@@ -65,7 +65,7 @@ const navigateToSongs = () => {
           }"
           class="relative flex items-center gap-2 hover:bg-nav-active disabled:bg-[#475a6d] disabled:opacity-50 hover:shadow-[0_4px_12px_rgba(52,152,219,0.3)] px-6 py-3 border-2 hover:border-nav-active disabled:border-[#475a6d] rounded-md overflow-hidden font-semibold text-nav-text disabled:text-[#7f8c8d] text-base transition-all hover:-translate-y-0.5 active:translate-y-0 duration-300 cursor-pointer disabled:cursor-not-allowed"
         >
-          <span class="z-[1] relative">曲目列表</span>
+          <i class="z-[1] relative fas fa-music"></i>
         </button>
         <button 
           @click="navigateToReport"
@@ -76,7 +76,7 @@ const navigateToSongs = () => {
           }"
           class="relative flex items-center gap-2 hover:bg-nav-active disabled:bg-[#475a6d] disabled:opacity-50 hover:shadow-[0_4px_12px_rgba(52,152,219,0.3)] px-6 py-3 border-2 hover:border-nav-active disabled:border-[#475a6d] rounded-md overflow-hidden font-semibold text-nav-text disabled:text-[#7f8c8d] text-base transition-all hover:-translate-y-0.5 active:translate-y-0 duration-300 cursor-pointer disabled:cursor-not-allowed"
         >
-          <span class="z-[1] relative">分析报告</span>
+          <i class="z-[1] relative fas fa-chart-bar"></i>
         </button>
       </div>
     </div>

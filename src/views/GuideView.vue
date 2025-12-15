@@ -371,8 +371,8 @@ const anyalyze = (input: string) => {
     <transition name="fade">
       <div v-show="showGuideContent" class="my-5">
         <div class="flex flex-wrap gap-2 mb-2">
-          <button @click="handleUpload" class="bg-[#2196f3] hover:bg-[#1976d2] px-2 py-1 border-none rounded text-white text-sm whitespace-nowrap transition-colors cursor-pointer">📁 上传文件</button>
-          <button @click="handlePaste" class="bg-[#2196f3] hover:bg-[#1976d2] px-2 py-1 border-none rounded text-white text-sm whitespace-nowrap transition-colors cursor-pointer">📋 粘贴数据</button>
+          <button @click="handleUpload" class="bg-[#2196f3] hover:bg-[#1976d2] px-2 py-1 border-none rounded text-white text-sm whitespace-nowrap transition-colors cursor-pointer"><i class="z-[1] relative fa-regular fa-file"></i> 上传文件</button>
+          <button @click="handlePaste" class="bg-[#2196f3] hover:bg-[#1976d2] px-2 py-1 border-none rounded text-white text-sm whitespace-nowrap transition-colors cursor-pointer"><i class="z-[1] relative fa-regular fa-clipboard"></i> 粘贴数据</button>
         </div>
         <textarea 
           v-model="scoreInput" 

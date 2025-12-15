@@ -45,7 +45,7 @@ function toggleCnSongs() {
       @click="toggleMenu"
       title="菜单"
     >
-      <span>☰</span>
+      <i class="z-[1] relative fas fa-bars"></i>
     </button>
 
     <!-- Popup Modal -->
@@ -64,7 +64,8 @@ function toggleCnSongs() {
               class="box-border flex items-center gap-[15px] bg-[#f8f9fa] hover:bg-white hover:shadow-[0_2px_8px_rgba(233,30,99,0.1)] px-[15px] py-3 border border-transparent hover:border-primary rounded-lg w-full text-[#333] hover:text-primary text-base no-underline transition-all hover:-translate-y-0.5 duration-200 cursor-pointer"
               :class="{ 'bg-primary/10 border-primary': onlyCnSongs }"
             >
-              <span class="w-6 text-xl text-center">{{ onlyCnSongs ? '✓' : '○' }}</span>
+                <i v-if="onlyCnSongs" class="fa-regular fa-circle-check"></i>
+                <i v-else class="fa-regular fa-circle"></i>
               <span>只查看国服</span>
             </button>
 
@@ -74,7 +75,7 @@ function toggleCnSongs() {
               class="box-border flex items-center gap-[15px] bg-[#f8f9fa] hover:bg-white hover:shadow-[0_2px_8px_rgba(233,30,99,0.1)] px-[15px] py-3 border border-transparent hover:border-primary rounded-lg w-full text-[#333] hover:text-primary text-base no-underline transition-all hover:-translate-y-0.5 duration-200 cursor-pointer"
               title="点击链接加入群聊【太鼓之达人Rating交流群】"
             >
-              <span class="w-6 text-xl text-center">👥</span>
+              <i class="fa-user-group fa-solid"></i>
               <span>加入QQ群</span>
             </a>
             
@@ -83,7 +84,7 @@ function toggleCnSongs() {
               @click="handleScreenshot" 
               class="box-border flex items-center gap-[15px] bg-[#f8f9fa] hover:bg-white hover:shadow-[0_2px_8px_rgba(233,30,99,0.1)] px-[15px] py-3 border border-transparent hover:border-primary rounded-lg w-full text-[#333] hover:text-primary text-base no-underline transition-all hover:-translate-y-0.5 duration-200 cursor-pointer"
             >
-              <span class="w-6 text-xl text-center">📷</span>
+              <i class="fa-solid fa-camera"></i>
               <span>保存截图</span>
             </button>
 
@@ -93,7 +94,7 @@ function toggleCnSongs() {
               class="box-border flex items-center gap-[15px] bg-[#f8f9fa] hover:bg-white hover:shadow-[0_2px_8px_rgba(233,30,99,0.1)] px-[15px] py-3 border border-transparent hover:border-primary rounded-lg w-full text-[#333] hover:text-primary text-base no-underline transition-all hover:-translate-y-0.5 duration-200 cursor-pointer"
               title="GitHub 仓库"
             >
-              <span class="w-6 text-xl text-center">⌨️</span>
+              <i class="fa-brands fa-github"></i>
               <span>GitHub 仓库</span>
             </a>
           </div>
