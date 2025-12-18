@@ -4,6 +4,7 @@ import AnnouncementModal from './components/AnnouncementModal.vue'
 import AnnouncementButton from './components/AnnouncementButton.vue'
 import Modal from './components/Modal.vue'
 import FloatingMenu from './components/FloatingMenu.vue'
+import FloatingSettings from './components/FloatingSettings.vue'
 import { useModal } from './composables/useModal'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { eventBus } from './utils/eventBus'
@@ -47,6 +48,7 @@ onUnmounted(() => {
       <router-view />
     </main>
     <FloatingMenu />
+    <FloatingSettings />
     <AnnouncementButton />
     <Modal 
       :show="modalState.show" 
