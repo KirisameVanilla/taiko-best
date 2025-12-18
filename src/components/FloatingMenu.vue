@@ -26,7 +26,7 @@ function handleScreenshot() {
   <div class="no-capture">
     <!-- Main Button -->
     <button 
-      class="right-[30px] bottom-[30px] z-[1000] fixed flex justify-center items-center bg-[#007AFF] hover:bg-[#0071e3] shadow-lg border-none rounded-full w-14 h-14 text-white text-2xl active:scale-90 transition-all duration-300 cursor-pointer" 
+      class="right-[30px] bottom-[30px] z-[999] fixed flex justify-center items-center bg-[#007AFF] hover:bg-[#0071e3] shadow-lg border-none rounded-full w-14 h-14 text-white text-2xl active:scale-90 transition-all duration-300 cursor-pointer" 
       @click="toggleMenu"
       title="菜单"
     >
