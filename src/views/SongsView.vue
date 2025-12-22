@@ -462,6 +462,38 @@ const filteredSongs = computed(() => {
     return sortOrder.value === 'asc' ? result : -result
   })
 })
+
+const currentPage = ref(1)
+const pageSize = ref(20)
+
+const totalPages = computed(() => Math.ceil(filteredSongs.value.length / pageSize.value))
+
+const paginatedSongs = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value
+  const end = start + pageSize.value
+  return filteredSongs.value.slice(start, end)
+})
+
+const visiblePages = computed(() => {
+  const pages: (number | string)[] = []
+  const delta = 2
+  const left = currentPage.value - delta
+  const right = currentPage.value + delta + 1
+  
+  for (let i = 1; i <= totalPages.value; i++) {
+    if (i === 1 || i === totalPages.value || (i >= left && i < right)) {
+      pages.push(i)
+    } else if (pages[pages.length - 1] !== '...') {
+      pages.push('...')
+    }
+  }
+  return pages
+})
+
+// Reset to page 1 when filters change
+watch([searchTerm, minConstant, maxConstant, statusFilters, onlyCnSongs, sortKey, sortOrder], () => {
+  currentPage.value = 1
+}, { deep: true })
 </script>
 
 <template>
@@ -572,7 +604,7 @@ const filteredSongs = computed(() => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="song in filteredSongs" :key="song.id" @click="openEditModal(song)" class="hover:bg-black/[0.02] transition-colors cursor-pointer">
+          <tr v-for="song in paginatedSongs" :key="song.id" @click="openEditModal(song)" class="hover:bg-black/[0.02] transition-colors cursor-pointer">
             <td class="p-4 border-black/5 border-b min-w-[200px] font-semibold text-[#1D1D1F] text-left">
               {{ (onlyCnSongs && song.title_cn) ? song.title_cn : song.title }}
               <span class="ml-1 font-normal text-[#8E8E93] text-xs">{{ difficultyMap[song.level] || '' }}</span>
@@ -605,6 +637,45 @@ const filteredSongs = computed(() => {
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Pagination -->
+    <div v-if="totalPages > 1" class="flex flex-wrap justify-center items-center gap-2 mt-8">
+      <button 
+        @click="currentPage--" 
+        :disabled="currentPage === 1"
+        class="flex justify-center items-center bg-white/50 hover:bg-white/80 disabled:opacity-30 backdrop-blur-sm border border-black/5 rounded-full w-10 h-10 transition-all cursor-pointer disabled:cursor-not-allowed"
+      >
+        <i class="fa-chevron-left fas"></i>
+      </button>
+      
+      <div class="flex items-center gap-1">
+        <template v-for="(p, index) in visiblePages" :key="index">
+          <span v-if="p === '...'" class="px-2 text-[#8E8E93]">...</span>
+          <button 
+            v-else
+            @click="currentPage = p as number"
+            :class="[
+              'w-10 h-10 rounded-full font-semibold text-sm transition-all cursor-pointer flex items-center justify-center',
+              currentPage === p ? 'bg-[#007AFF] text-white shadow-lg shadow-[#007AFF]/20' : 'bg-white/50 hover:bg-white/80 text-[#1D1D1F] border border-black/5'
+            ]"
+          >
+            {{ p }}
+          </button>
+        </template>
+      </div>
+
+      <button 
+        @click="currentPage++" 
+        :disabled="currentPage === totalPages"
+        class="flex justify-center items-center bg-white/50 hover:bg-white/80 disabled:opacity-30 backdrop-blur-sm border border-black/5 rounded-full w-10 h-10 transition-all cursor-pointer disabled:cursor-not-allowed"
+      >
+        <i class="fa-chevron-right fas"></i>
+      </button>
+
+      <div class="ml-4 text-[#8E8E93] text-sm">
+        第 {{ currentPage }} / {{ totalPages }} 页
+      </div>
     </div>
 
     <EditScoreModal
